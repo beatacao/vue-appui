@@ -1,6 +1,6 @@
 <template>
   <div>
-      <el-tag></el-tag>
+      <el-tag>{{tag}}</el-tag>
   </div>
 </template>
 
@@ -9,6 +9,12 @@
 
   export default {
     name: 'BTag',
-    extends: ElTag
+    extends: ElTag,
+    props: {
+      tag: {
+        type: String,
+        default: ''
+      }
+    }
   }
 </script>

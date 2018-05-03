@@ -27,6 +27,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     "indent": [0, "tab", {
         "SwitchCase": 1
-    }]
+    }],
+    "no-trailing-spaces": 0
   }
 }

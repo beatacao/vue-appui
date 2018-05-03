@@ -12,9 +12,10 @@ import BTag from '../packages/base/tag/index'
 import BTip from '../packages/base/tip/index'
 import BInput from '../packages/base/input/index'
 import BTextarea from '../packages/base/textarea/index'
-
 // import MetaInfo from '../packages/meta-info/index'
 // import BLoadingBar from '../packages/loading-bar/index'
+
+import BAppBase from '../packages/application/base/index'
 
 const components = [
   BInput,
@@ -24,7 +25,8 @@ const components = [
   BRadio,
   BSelect,
   BTag,
-  BTip
+  BTip,
+  BAppBase
 ]
 
 const install = function (Vue) {
@@ -48,7 +50,8 @@ export default {
   BRadio,
   BSelect,
   BTag,
-  BTip
+  BTip,
+  BAppBase
 //   MetaInfo,
 //   BLoadingBar
 }

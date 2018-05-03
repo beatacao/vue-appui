@@ -1,6 +1,10 @@
 <template>
   <div>
-      <el-tooltip></el-tooltip>
+    <el-tooltip effect="light" placement="right">
+      <ul v-if='tips.length>0'>
+        <li v-for='(t, key) in tips' :key='key'>{{t}}</li>
+      </ul>
+    </el-tooltip>
   </div>
 </template>
 
@@ -9,6 +13,20 @@
 
   export default {
     name: 'BTip',
-    extends: ElTooltip
+    extends: ElTooltip,
+    props: {
+      tip: {
+        type: Array | String,
+        default: []
+      }
+    },
+    computed: {
+      tips () {
+        if (typeof this.tip === 'string') {
+          return [this.tip]
+        }
+        return this.tip
+      }
+    }
   }
 </script>
