@@ -5,10 +5,10 @@
                 <BTag v-if='item.tag && item.tag.length>0' :tag='item.tag'></BTag>
             </div>
             <div class="base-component">
-                <BInput v-if='item.type === "input"' :placeholder='item.placeholder'></BInput>
+                <BInput v-if='item.type === "input"' :placeholder='item.placeholder' disabled></BInput>
                 <BTextarea v-if='item.type === "multi-input"' :placeholder='item.placeholder'></BTextarea>
                 <BSelect v-if='item.type === "select"' :value='item.value' :options='item.options'></BSelect>
-                <BSelect v-if='item.type === "multi-select"' multiple='true' :value='item.value' :options='item.options'></BSelect>
+                <BSelect v-if='item.type === "multi-select"' multiple :value='item.value' :options='item.options'></BSelect>
                 <!-- <BInput v-if='item.type === "region"'></BInput>
                 <BInput v-if='item.type === "line-select"'></BInput>
                 <BInput v-if='item.type === "multi-tags"'></BInput>

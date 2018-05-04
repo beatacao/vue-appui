@@ -11,7 +11,7 @@
       </el-select>
 
       <el-select v-if='multiple'
-        v-model="value"
+        v-model="currentValue"
         multiple
         collapse-tags
         placeholder="请选择">
