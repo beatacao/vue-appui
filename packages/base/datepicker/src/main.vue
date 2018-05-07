@@ -1,6 +1,6 @@
 <template>
   <div>
-      <el-date-picker></el-date-picker>
+      <el-date-picker v-bind='$attrs'></el-date-picker>
   </div>
 </template>
 

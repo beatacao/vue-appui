@@ -1,6 +1,6 @@
 <template>
   <div>
-      <el-radio></el-radio>
+      <el-radio v-bind='$attrs'></el-radio>
   </div>
 </template>
 

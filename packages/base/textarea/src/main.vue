@@ -1,6 +1,6 @@
 <template>
   <div>
-      <el-input type='textarea'></el-input>
+      <el-input type='textarea' v-bind='$attrs'></el-input>
   </div>
 </template>
 

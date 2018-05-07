@@ -1,6 +1,6 @@
 <template>
   <div>
-      <el-checkbox></el-checkbox>
+      <el-checkbox v-bind='$attrs'></el-checkbox>
   </div>
 </template>
 

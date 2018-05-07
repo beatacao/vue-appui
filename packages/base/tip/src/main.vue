@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-tooltip effect="light" placement="right">
+    <el-tooltip effect="light" placement="right" v-bind='$attrs'>
       <ul v-if='tips.length>0'>
         <li v-for='(t, key) in tips' :key='key'>{{t}}</li>
       </ul>

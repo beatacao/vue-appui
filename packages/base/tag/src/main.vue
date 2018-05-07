@@ -1,6 +1,6 @@
 <template>
   <div>
-      <el-tag>{{tag}}</el-tag>
+      <el-tag v-bind='$attrs'>{{tag}}</el-tag>
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-      <el-input :placeholder='placeholder'></el-input>
+      <el-input :placeholder='placeholder' v-bind='$attrs'></el-input>
   </div>
 </template>
 
