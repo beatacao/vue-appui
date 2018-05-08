@@ -1,0 +1,5 @@
+.vu__application-region {
+    .wrapper, .el-input {
+        display:inline-block; width:auto;
+    }
+}

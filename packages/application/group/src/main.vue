@@ -1,0 +1,50 @@
+<template>
+    <div class='vu__application-group'>
+        <el-checkbox-group v-if='itemType==="checkbox"' v-model="currentValue">
+            <BCheckbox v-for='(item, index) in options' :key='index' :label='item.value'>{{item.label}}</BCheckbox>
+        </el-checkbox-group>
+        <el-radio-group v-else v-model="currentValue">
+            <BRadio v-for='(item, index) in options' :key='index' :label='item.value'>{{item.label}}</BRadio>
+        </el-radio-group>
+    </div>
+</template>
+
+<script>
+    import BCheckbox from '~packages/base/checkbox/index'
+    import BRadio from '~packages/base/radio/index'
+    export default {
+        name: 'BGroup',
+        data () {
+            return {}
+        },
+        props: {
+            itemType: {
+                type: String,
+                default: function () {
+                    return 'checkbox'
+                }
+            },
+            options: {
+                type: Array,
+                default: function () {
+                    return []
+                }
+            },
+            value: {
+                type: Array,
+                default: function () {
+                    return []
+                }
+            }
+        },
+        components: {BCheckbox, BRadio},
+        methods: {
+            currentValue () {
+                return this.value
+            }
+        },
+        mounted () {
+            console.log('BAppSelectLine mounted!')
+        }
+    }
+</script>

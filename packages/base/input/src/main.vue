@@ -1,7 +1,5 @@
 <template>
-  <div>
-      <el-input :placeholder='placeholder' v-bind='$attrs'></el-input>
-  </div>
+  <el-input :placeholder='placeholder' v-bind='$attrs'></el-input>
 </template>
 
 <script>

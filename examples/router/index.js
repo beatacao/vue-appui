@@ -12,9 +12,9 @@ export default new Router({
       component: Index
     },
     {
-      path: '/test',
-      name: 'test',
-      component: r => require.ensure([], () => r(require('../docs/test.md')))
+      path: '/readme',
+      name: 'readme',
+      component: r => require.ensure([], () => r(require('../docs/readme.md')))
     }
   ]
 })

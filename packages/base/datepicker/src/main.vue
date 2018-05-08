@@ -1,7 +1,5 @@
 <template>
-  <div>
-      <el-date-picker v-bind='$attrs'></el-date-picker>
-  </div>
+    <el-date-picker v-bind='$attrs'></el-date-picker>
 </template>
 
 <script>

@@ -1,22 +1,21 @@
 <template>
     <div class='vu__application-base'>
         <div v-for='(item,index) in configArray' :key='index' :class='"application-base-" + item.type'>
-            <div class="base-tag">
-                <BTag v-if='item.tag && item.tag.length>0' :tag='item.tag'></BTag>
-            </div>
+            <label v-if='item.label && item.label.length>0' class="base-label">{{item.label}}</label>
             <div class="base-component">
                 <BInput v-if='item.type === "input"' :placeholder='item.placeholder'></BInput>
-                <BTextarea v-if='item.type === "multi-input"' :placeholder='item.placeholder'></BTextarea>
+                <BTextarea v-if='item.type === "input-multi"' :placeholder='item.placeholder'></BTextarea>
+                <BRegion v-if='item.type === "region"' :itemType='item.itemType' :options='item.options'></BRegion>
                 <BSelect v-if='item.type === "select"' :value='item.value' :options='item.options'></BSelect>
-                <BSelect v-if='item.type === "multi-select"' multiple :value='item.value' :options='item.options'></BSelect>
-                <!-- <BInput v-if='item.type === "region"'></BInput>
-                <BInput v-if='item.type === "line-select"'></BInput>
-                <BInput v-if='item.type === "multi-tags"'></BInput>
-                <BInput v-if='item.type === "ld-select"'></BInput> -->
+                <BSelect v-if='item.type === "select-multi"' multiple :value='item.value' :options='item.options'></BSelect>
+                <BGroup v-if='item.type === "group"' :itemType='item.itemType' :options='item.options' :value='item.value'></BGroup>
+                <BTabs v-if='item.type === "tabs"' :options='item.options'></BTabs>
+                <!-- <BInput v-if='item.type === "tags"'></BInput>
+                <BInput v-if='item.type === "select-ld"'></BInput> -->
             </div>
-            <div class="base-tip">
+            <!-- <div class="base-tip">
                 <BTip v-if='item.tip && item.tip.length>0' :tip='item.tip'></BTip>
-            </div>
+            </div> -->
             <!-- <div class="base-validator">
                 <BValidator v-if='item.validator'></BValidator>
             </div> -->

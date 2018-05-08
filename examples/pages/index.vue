@@ -17,7 +17,7 @@
                 // return this.$store.getters['formatData']
                 var arr = [
                 {
-                        'tag': '单行输入框',
+                        'label': '单行输入框',
                         'validator': null,
                         'type': 'input',
                         'name': 'input',
@@ -28,10 +28,10 @@
                         'deps': null
                     },
                     {
-                        'tag': '多行输入框',
+                        'label': '多行输入框',
                         'validator': null,
-                        'type': 'multi-input',
-                        'name': 'multi-input',
+                        'type': 'input-multi',
+                        'name': 'input-multi',
                         'placeholder': '请输入内容',
                         'value': '',
                         'tip': '',
@@ -39,10 +39,10 @@
                         'deps': null
                     },
                     {
-                        'tag': '下拉单选框',
+                        'label': '下拉单选框',
                         'validator': null,
                         'type': 'select',
-                        'name': 'selct',
+                        'name': 'select',
                         'placeholder': '',
                         'value': '',
                         'tip': '',
@@ -69,10 +69,10 @@
                         ]
                     },
                     {
-                        'tag': '下拉多选',
+                        'label': '下拉多选',
                         'validator': null,
-                        'type': 'multi-select',
-                        'name': 'multi-select',
+                        'type': 'select-multi',
+                        'name': 'select-multi',
                         'placeholder': '',
                         'value': '',
                         'tip': '',
@@ -101,18 +101,18 @@
 
                     },
                     {
-                        'tag': '区间',
+                        'label': '区间',
                         'validator': null,
                         'type': 'region',
                         'name': 'region',
                         'placeholder': '',
                         'split': '-',
                         'itemType': 'input',
-                        'value': '',
+                        'value': [],
                         'tip': '提示信息',
                         'unit': null,
                         'deps': null,
-                        'items': [  
+                        'options': [  
                             {
                                 'label': '',
                                 'validator': null,
@@ -132,12 +132,43 @@
                         ]
                     },
                     {
+                        'label': '区间-datepicker',
+                        'validator': null,
+                        'type': 'region',
+                        'name': 'region',
+                        'placeholder': '',
+                        'split': '-',
+                        'itemType': 'datepicker',
+                        'value': [],
+                        'tip': '提示信息',
+                        'unit': null,
+                        'deps': null,
+                        'options': [  
+                            {
+                                'label': '',
+                                'validator': null,
+                                'placeholder': '',
+                                'value': '',
+                                'name': 'stock_out_sku_rate_min',
+                                'unit': ''
+                            },
+                            {
+                                'label': '',
+                                'validator': null,
+                                'placeholder': '',
+                                'value': '',
+                                'name': 'stock_out_sku_rate_max',
+                                'unit': ''
+                            }
+                        ]
+                    },
+                    {
                         'label': '单行选择',
-                        'type': 'line-select',
-                        'name': 'line-select',
+                        'type': 'group',
+                        'name': 'group-checkbox',
                         'itemType': 'checkbox',
                         'value': ['0'],
-                        'items': [
+                        'options': [
                             {
                                 'label': '选择1',
                                 'value': '0'
@@ -150,9 +181,9 @@
                     },
                     {
                         'label': '多标签',
-                        'type': 'multi-tabs',
+                        'type': 'tabs',
                         'tip': null,
-                        'items': [
+                        'options': [
                             {
                                 'label': '正向',
                                 'validator': '',
@@ -176,12 +207,12 @@
                     {
                         'label': '多选下拉级联',
                         'validator': '',
-                        'type': 'ld-select',
+                        'type': 'select-ld',
                         'placeholder': '',
                         'value': '',
-                        'name': 'ld-select',
+                        'name': 'select-ld',
                         'search': false,
-                        'items': [] 
+                        'options': [] 
                     }
                 ]
                 return arr
@@ -190,5 +221,14 @@
     }
 </script>
 
-<style lang='less'>
+<style lang='less' type='text/less'>
+.vueui__demo .base-component{
+    display: inline-block; vertical-align: top; width:600px; text-align:left;
+}
+.base-label{
+    display: inline-block; width:200px; text-align:right;
+}
+[class^=application-base]{
+    margin-bottom: 20px;
+}
 </style>

@@ -1,7 +1,5 @@
 <template>
-  <div>
-      <el-input type='textarea' v-bind='$attrs'></el-input>
-  </div>
+    <el-input type='textarea' v-bind='$attrs'></el-input>
 </template>
 
 <script>

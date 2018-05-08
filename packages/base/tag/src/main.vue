@@ -1,7 +1,5 @@
 <template>
-  <div>
-      <el-tag v-bind='$attrs'>{{tag}}</el-tag>
-  </div>
+    <el-tag v-bind='$attrs'>{{tag}}</el-tag>
 </template>
 
 <script>

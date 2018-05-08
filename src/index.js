@@ -16,6 +16,9 @@ import BTextarea from '../packages/base/textarea/index'
 // import BLoadingBar from '../packages/loading-bar/index'
 
 import BAppBase from '../packages/application/base/index'
+import BGroup from '../packages/application/group/index'
+import BRegion from '../packages/application/region/index'
+import BTabs from '../packages/application/tabs/index'
 
 const components = [
   BInput,
@@ -26,7 +29,10 @@ const components = [
   BSelect,
   BTag,
   BTip,
-  BAppBase
+  BAppBase,
+  BGroup,
+  BRegion,
+  BTabs
 ]
 
 const install = function (Vue) {
@@ -51,7 +57,10 @@ export default {
   BSelect,
   BTag,
   BTip,
-  BAppBase
+  BAppBase,
+  BGroup,
+  BRegion,
+  BTabs
 //   MetaInfo,
 //   BLoadingBar
 }
