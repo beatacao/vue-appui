@@ -10,8 +10,7 @@
                 <BSelect v-if='item.type === "select-multi"' multiple :value='item.value' :options='item.options'></BSelect>
                 <BGroup v-if='item.type === "group"' :itemType='item.itemType' :options='item.options' :value='item.value'></BGroup>
                 <BTabs v-if='item.type === "tabs"' :options='item.options'></BTabs>
-                <!-- <BInput v-if='item.type === "tags"'></BInput>
-                <BInput v-if='item.type === "select-ld"'></BInput> -->
+                <BCascaderMulti v-if='item.type === "select-ld"' :options='item.options'></BCascaderMulti>
             </div>
             <!-- <div class="base-tip">
                 <BTip v-if='item.tip && item.tip.length>0' :tip='item.tip'></BTip>

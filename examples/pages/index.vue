@@ -187,7 +187,7 @@
                             {
                                 'label': '正向',
                                 'validator': '',
-                                'type': 'multi-input',
+                                'type': 'input-multi',
                                 'placeholder': '一行一条，最多3000条',
                                 'value': '',
                                 'resizeable': false,
@@ -196,7 +196,7 @@
                             {
                                 'label': '反向',
                                 'validator': '',
-                                'type': 'multi-input',
+                                'type': 'input-multi',
                                 'placeholder': '一行一条，最多3000条',
                                 'value': '',
                                 'resizeable': false,
@@ -210,9 +210,69 @@
                         'type': 'select-ld',
                         'placeholder': '',
                         'value': '',
-                        'name': 'select-ld',
+                        'name': '',
                         'search': false,
-                        'options': [] 
+                        'options': [
+                            {
+                                'label': '下拉多选1',
+                                'validator': null,
+                                'type': 'select-multi',
+                                'name': 'select-multi1',
+                                'placeholder': '下拉多选1',
+                                'value': '',
+                                'tip': '',
+                                'unit': null,
+                                'deps': null,
+                                'search': false,
+                                'options': [
+                                    {
+                                        'label': '畅销款',
+                                        'value': '畅销款'
+                                    },
+                                    {
+                                        'label': '平销款',
+                                        'value': '平销款'
+                                    },
+                                    {
+                                        'label': '滞销款',
+                                        'value': '滞销款'
+                                    },
+                                    {
+                                        'label': '未知',
+                                        'value': '未知'
+                                    }
+                                ],
+                                'custom': null
+                            },
+                            {
+                                'label': '下拉多选2',
+                                'validator': null,
+                                'type': 'select-multi',
+                                'name': 'select-multi1',
+                                'placeholder': '下拉多选2',
+                                'value': '',
+                                'tip': '',
+                                'unit': null,
+                                'deps': null,
+                                'search': false,
+                                'options': [],
+                                'custom': null
+                            },
+                            {
+                                'label': '下拉多选3',
+                                'validator': null,
+                                'type': 'select-multi',
+                                'name': 'select-multi1',
+                                'placeholder': '下拉多选3',
+                                'value': '',
+                                'tip': '',
+                                'unit': null,
+                                'deps': null,
+                                'search': false,
+                                'options': [],
+                                'custom': null
+                            }
+                        ] 
                     }
                 ]
                 return arr

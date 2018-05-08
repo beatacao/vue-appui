@@ -19,6 +19,7 @@ import BAppBase from '../packages/application/base/index'
 import BGroup from '../packages/application/group/index'
 import BRegion from '../packages/application/region/index'
 import BTabs from '../packages/application/tabs/index'
+import BCascaderMulti from '../packages/application/cascaderMulti/index'
 
 const components = [
   BInput,
@@ -32,7 +33,8 @@ const components = [
   BAppBase,
   BGroup,
   BRegion,
-  BTabs
+  BTabs,
+  BCascaderMulti
 ]
 
 const install = function (Vue) {
@@ -60,7 +62,8 @@ export default {
   BAppBase,
   BGroup,
   BRegion,
-  BTabs
+  BTabs,
+  BCascaderMulti
 //   MetaInfo,
 //   BLoadingBar
 }

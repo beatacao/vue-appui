@@ -6,7 +6,6 @@
           :key="item.value"
           :label="item.label"
           :value="item.value"
-          placeholder="请选择"
           >
         </el-option>
       </el-select>
@@ -14,8 +13,7 @@
       <el-select v-if='multiple'
         v-model="currentValue"
         multiple
-        collapse-tags
-        placeholder="请选择" v-bind='$attrs'>
+        collapse-tags v-bind='$attrs'>
         <el-option
           v-for="item in options"
           :key="item.value"
