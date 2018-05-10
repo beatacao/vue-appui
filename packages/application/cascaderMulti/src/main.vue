@@ -5,8 +5,8 @@
         :options='item.options' 
         :placeholder='item.placeholder' 
         :name='item.name' 
-        @focus='onFocus(index)'
-        @change='onChange(index)'>
+        @focus='onFocus(arguments[0], index)'
+        @change='onChange(arguments[0], index)'>
     </BSelect>
     </div>
 </template>
@@ -34,13 +34,13 @@
             
         },
         methods: {
-            onFocus (index) {
+            onFocus (e, index) {
                 var options = this.options[index].options
                 if (!options || options.length === 0) {
                     this.$emit('focus', {name: options[index].name})
                 }
             },
-            onChange (index) {
+            onChange (val, index) {
                 var options = this.options[index].options
                 this.$emit('change', {name: options[index].name})
             }
