@@ -14,11 +14,12 @@
         <div v-else>
             <BDatepicker
                 v-bind='$attrs'
-                v-model="currentValue"
+                :value="currentValue"
                 type="daterange"
                 :range-separator="split"
                 :start-placeholder="options[0].placeholder"
-                :end-placeholder="options[1].placeholder">
+                :end-placeholder="options[1].placeholder"
+                @input='timeInput'>
             </BDatepicker>
         </div>
     </div>
@@ -31,7 +32,9 @@
     export default {
         name: 'BRegion',
         data () {
-            return {}
+            return {
+                currentValue: ''
+            }
         },
         extends: BDatepicker,
         components: {BInput},
@@ -59,14 +62,12 @@
                 }
             }
         },
-        computed: {
-            currentValue: {
-                get: function () {
-                    return this.value || []
-                },
-                set: function (val) {
-                    this.$emit('onChange', val)
-                }
+        created () {
+            this.currentValue = this.value
+        },
+        methods: {
+            timeInput (val) {
+                this.currentValue = val
             }
         },
         mounted () {
