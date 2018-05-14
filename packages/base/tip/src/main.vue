@@ -1,8 +1,7 @@
 <template>
-  <el-tooltip effect="light" placement="right" v-bind='$attrs'>
-    <ul v-if='tips.length>0'>
-      <li v-for='(t, key) in tips' :key='key'>{{t}}</li>
-    </ul>
+  <el-tooltip :effect="effect" :placement="placement" v-bind='$attrs' class='vu__base-tooltip'>
+    <div slot='content' v-html='content'></div>
+    <el-button class='vu-button'>?</el-button>
   </el-tooltip>
 </template>
 
@@ -13,9 +12,17 @@
     name: 'BTip',
     extends: ElTooltip,
     props: {
-      tip: {
-        type: Array | String,
-        default: []
+      effect: {
+        type: String,
+        default: 'light'
+      },
+      placement: {
+        type: String,
+        default: 'right'
+      },
+      content: {
+        type: String,
+        default: ''
       }
     },
     computed: {

@@ -23,7 +23,9 @@
                         'name': 'input',
                         'placeholder': '请输入内容',
                         'value': '',
-                        'tip': '提示信息',
+                        'tip': {
+                            'content': '输入说明：<br/>1、aaa <br/>2、bbb<br/>3、ccc'
+                        },
                         'unit': null,
                         'deps': null
                     },
@@ -34,7 +36,6 @@
                         'name': 'input-multi',
                         'placeholder': '请输入内容',
                         'value': '',
-                        'tip': '',
                         'unit': null,
                         'deps': null
                     },
@@ -45,7 +46,6 @@
                         'name': 'select',
                         'placeholder': '',
                         'value': '',
-                        'tip': '',
                         'unit': null,
                         'deps': null,
                         'search': false,
@@ -75,7 +75,6 @@
                         'name': 'select-multi',
                         'placeholder': '',
                         'value': '',
-                        'tip': '',
                         'unit': null,
                         'deps': null,
                         'search': false,
@@ -109,7 +108,6 @@
                         'split': '-',
                         'itemType': 'input',
                         'value': [],
-                        'tip': '提示信息',
                         'unit': null,
                         'deps': null,
                         'options': [  
@@ -140,7 +138,6 @@
                         'split': '-',
                         'itemType': 'datepicker',
                         'value': [],
-                        'tip': '提示信息',
                         'unit': null,
                         'deps': null,
                         'options': [  
@@ -182,7 +179,6 @@
                     {
                         'label': '多标签',
                         'type': 'tabs',
-                        'tip': null,
                         'options': [
                             {
                                 'label': '正向',
@@ -220,7 +216,6 @@
                                 'name': 'select-multi1',
                                 'placeholder': '下拉多选1',
                                 'value': '',
-                                'tip': '',
                                 'unit': null,
                                 'deps': null,
                                 'search': false,
@@ -251,7 +246,6 @@
                                 'name': 'select-multi1',
                                 'placeholder': '下拉多选2',
                                 'value': '',
-                                'tip': '',
                                 'unit': null,
                                 'deps': null,
                                 'search': false,
@@ -265,7 +259,6 @@
                                 'name': 'select-multi1',
                                 'placeholder': '下拉多选3',
                                 'value': '',
-                                'tip': '',
                                 'unit': null,
                                 'deps': null,
                                 'search': false,

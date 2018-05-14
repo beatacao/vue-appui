@@ -12,9 +12,10 @@
                 <BTabs v-if='item.type === "tabs"' :options='item.options'></BTabs>
                 <BCascaderMulti v-if='item.type === "select-ld"' :options='item.options'></BCascaderMulti>
             </div>
-            <!-- <div class="base-tip">
-                <BTip v-if='item.tip && item.tip.length>0' :tip='item.tip'></BTip>
-            </div> -->
+            <div class="base-tip" v-if='item.tip && item.tip.content.length>0'>
+                <BTip :content='item.tip.content'></BTip>
+            </div>
+            
             <!-- <div class="base-validator">
                 <BValidator v-if='item.validator'></BValidator>
             </div> -->
@@ -47,3 +48,11 @@
         }
     }
 </script>
+
+<style lang='less'>
+    .vu__application-base{
+        .base-tip{
+            display:inline-block; 
+        }
+    }
+</style>
