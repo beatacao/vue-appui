@@ -1,6 +1,9 @@
 <template>
   <div class='vu__base-select'>
-    <el-select v-if='!multiple' v-model="currentValue" placeholder="请选择"  v-bind='$attrs'>
+    <el-select v-if='!multiple' v-model="currentValue" placeholder="请选择"  
+      @focus='onFocus'
+      @change='onChange'
+      v-bind='$attrs'>
         <el-option
           v-for="item in options"
           :key="item.value"

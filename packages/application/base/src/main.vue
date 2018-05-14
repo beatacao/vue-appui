@@ -11,6 +11,7 @@
                 <BGroup v-if='item.type === "group"' :itemType='item.itemType' :options='item.options' :value='item.value'></BGroup>
                 <BTabs v-if='item.type === "tabs"' :options='item.options'></BTabs>
                 <BCascaderMulti :name='item.name' v-if='item.type === "select-ld"' :options='item.options' @focus='cascaderFocus(arguments[0], index)' @change='cascaderChange(arguments[0], index)'></BCascaderMulti>
+                <BRegionMulti v-if='item.type === "region-multi"' :name='item.name' :value='item.value' :options='item.options'></BRegionMulti>
             </div>
             <div class="base-tip" v-if='item.tip && item.tip.content.length>0'>
                 <BTip :content='item.tip.content'></BTip>

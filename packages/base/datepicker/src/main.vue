@@ -1,5 +1,5 @@
 <template>
-    <el-date-picker v-bind='$attrs'></el-date-picker>
+    <el-date-picker v-bind='$attrs' @input='input'></el-date-picker>
 </template>
 
 <script>
@@ -7,6 +7,11 @@
 
   export default {
     name: 'BDatepicker',
-    extends: ElDatepicker
+    extends: ElDatepicker,
+    methods: {
+      input (val) {
+        this.$emit('input', val)
+      }
+    }
   }
 </script>
