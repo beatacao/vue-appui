@@ -9,7 +9,6 @@
           >
         </el-option>
       </el-select>
-
       <el-select v-if='multiple'
         v-model="currentValue"
         multiple

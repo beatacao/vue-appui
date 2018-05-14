@@ -10,7 +10,7 @@
                 <BSelect v-if='item.type === "select-multi"' multiple :value='item.value' :options='item.options'></BSelect>
                 <BGroup v-if='item.type === "group"' :itemType='item.itemType' :options='item.options' :value='item.value'></BGroup>
                 <BTabs v-if='item.type === "tabs"' :options='item.options'></BTabs>
-                <BCascaderMulti v-if='item.type === "select-ld"' :options='item.options'></BCascaderMulti>
+                <BCascaderMulti :name='item.name' v-if='item.type === "select-ld"' :options='item.options' @focus='cascaderFocus(arguments[0], index)' @change='cascaderChange(arguments[0], index)'></BCascaderMulti>
             </div>
             <div class="base-tip" v-if='item.tip && item.tip.content.length>0'>
                 <BTip :content='item.tip.content'></BTip>
@@ -38,8 +38,11 @@
             }
         },
         methods: {
-            onChange (e, opt) {
-                this.$emit('onChange', opt)
+            cascaderFocus (opt, index) {
+                this.$emit('change', Object.assign(opt, {type: 'cascaderFocus', rIndex: index}))
+            },
+            cascaderChange (opt, index) {
+                this.$emit('change', Object.assign(opt, {type: 'cascaderChange', rIndex: index}))
             }
         },
         mounted () {

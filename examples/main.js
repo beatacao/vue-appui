@@ -5,8 +5,11 @@ import App from './App'
 import router from './router'
 import '../packages/theme-default/lib/index.css'
 import demoBlock from './components/DemoBlock.vue'
-
+import { sync } from 'vuex-router-sync'
+import store from './store'
 import vueui from '../src/index'
+
+sync(store, router)
 
 Vue.config.productionTip = false
 
@@ -16,6 +19,7 @@ Vue.use(vueui)
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
