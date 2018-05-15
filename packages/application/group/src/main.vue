@@ -37,7 +37,7 @@
                 }
             },
             value: {
-                type: Array,
+                type: Array | String,
                 default: function () {
                     return []
                 }
