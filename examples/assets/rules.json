@@ -147,8 +147,8 @@
             "label": "单行选择",
             "type": "group",
             "name": "group-checkbox",
-            "itemType": "checkbox",
-            "value": ["0"],
+            "itemType": "radio",
+            "value": "0",
             "options": [
                 {
                     "label": "选择1",

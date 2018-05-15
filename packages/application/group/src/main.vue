@@ -1,10 +1,14 @@
 <template>
     <div class='vu__application-group'>
         <el-checkbox-group v-if='itemType==="checkbox"' v-model="currentValue">
-            <BCheckbox v-for='(item, index) in options' :key='index' :label='item.value'>{{item.label}}</BCheckbox>
+            <BCheckbox v-for='(item, index) in options' :key='index' :label='item.value'>
+                {{item.label}}
+            </BCheckbox>
         </el-checkbox-group>
         <el-radio-group v-else v-model="currentValue">
-            <BRadio v-for='(item, index) in options' :key='index' :label='item.value'>{{item.label}}</BRadio>
+            <BRadio v-for='(item, index) in options' :key='index' :label='item.value'>
+                {{item.label}}
+            </BRadio>
         </el-radio-group>
     </div>
 </template>
@@ -15,7 +19,9 @@
     export default {
         name: 'BGroup',
         data () {
-            return {}
+            return {
+                currentValue: []
+            }
         },
         props: {
             itemType: {
@@ -38,11 +44,10 @@
             }
         },
         components: {BCheckbox, BRadio},
-        methods: {
-            currentValue () {
-                return this.value
-            }
+        created () {
+            this.currentValue = this.value
         },
+        methods: {},
         mounted () {
             console.log('BAppSelectLine mounted!')
         }

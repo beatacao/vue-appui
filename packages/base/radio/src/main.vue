@@ -1,5 +1,5 @@
 <template>
-    <el-radio v-bind='$attrs'></el-radio>
+    <el-radio v-bind='$attrs'><slot></slot></el-radio>
 </template>
 
 <script>
