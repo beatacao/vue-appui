@@ -80,7 +80,9 @@
                     "value": "未知"
                 }
             ],
-            "custom": null
+            "custom": {
+                "template": "<input type='text' name='custom-min'> - <input type='text' name='custom-max'>%"
+            }
 
         },
         {

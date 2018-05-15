@@ -7,7 +7,7 @@
                 <BTextarea v-if='item.type === "input-multi"' :placeholder='item.placeholder'></BTextarea>
                 <BRegion v-if='item.type === "region"' :itemType='item.itemType' :options='item.options'></BRegion>
                 <BSelect v-if='item.type === "select"' :value='item.value' :options='item.options'></BSelect>
-                <BSelect v-if='item.type === "select-multi"' multiple :value='item.value' :options='item.options'></BSelect>
+                <BSelect v-if='item.type === "select-multi"' :custom='item.custom'  @visibleChange='visibleChange(arguments[0], index)' multiple :value='item.value' :options='item.options'></BSelect>
                 <BGroup v-if='item.type === "group"' :itemType='item.itemType' :options='item.options' :value='item.value'></BGroup>
                 <BTabs v-if='item.type === "tabs"' :options='item.options'></BTabs>
                 <BCascaderMulti :name='item.name' v-if='item.type === "select-ld"' :options='item.options' @focus='cascaderFocus(arguments[0], index)' @change='cascaderChange(arguments[0], index)'></BCascaderMulti>
@@ -44,6 +44,9 @@
             },
             cascaderChange (opt, index) {
                 this.$emit('change', Object.assign(opt, {type: 'cascaderChange', rIndex: index}))
+            },
+            visibleChange (isVisible, index) {
+                this.$emit('change', Object.assign({isVisible: isVisible}, {type: 'selectVisibleChange', rIndex: index}))
             }
         },
         mounted () {

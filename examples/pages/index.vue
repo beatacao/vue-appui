@@ -24,6 +24,9 @@
                     case 'cascaderChange':
                         self.resetData(opt)
                         break
+                    case 'selectVisibleChange':
+                        self.handleSelect(opt)
+                        break;
                     default: 
                         this.$emit('change')
                 }
@@ -71,6 +74,15 @@
                 for(var i=opt.index+1; i<=length-1; i++){
                     rule.options[i].options = []
                     rule.options[i].value = []
+                }
+                this.$store.state.rules.splice(opt.rIndex, 1, rule)
+            },
+            handleSelect (opt) {
+                var max_val = document.getElementsByName('custom-max')[0].value
+                var min_val = document.getElementsByName('custom-min')[0].value
+                var rule = this.$store.state.rules[opt.rIndex]
+                if(max_val && min_val){
+                    rule.value = [min_val + '#' + max_val]
                 }
                 this.$store.state.rules.splice(opt.rIndex, 1, rule)
             }

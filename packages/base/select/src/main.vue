@@ -3,6 +3,7 @@
     <el-select v-if='!multiple' v-model="currentValue" :value='value' :placeholder="placeholder"  
       @focus='onFocus'
       @change='onChange'
+      @visible-change='visibleChange'
       v-bind='$attrs'>
         <el-option
           v-for="item in options"
@@ -17,6 +18,7 @@
         multiple
         @focus='onFocus'
         @change='onChange'
+        @visible-change='visibleChange'
         :value='value'
         :placeholder="placeholder" 
         collapse-tags v-bind='$attrs'>
@@ -26,6 +28,9 @@
           :label="item.label"
           :value="item.value">
         </el-option>
+        <slot name='custom'>
+          <div v-if='custom && custom.template' v-html='custom.template'></div>
+        </slot>
       </el-select>
   </div>
 </template>
@@ -53,6 +58,9 @@
       placeholder: {
         type: String,
         default: '请选择'
+      },
+      custom: {
+        default: null
       }
     },
     data () {
@@ -71,6 +79,9 @@
       },
       onChange (v) {
         this.$emit('change', v)
+      },
+      visibleChange (isVisible) {
+        this.$emit('visibleChange', isVisible)
       }
     }
   }
