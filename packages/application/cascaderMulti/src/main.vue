@@ -7,6 +7,7 @@
         :placeholder='item.placeholder' 
         :name='item.name' 
         :value='item.value'
+        filterable='true'
         @focus='onFocus(arguments[0], index)'
         @change='onChange(arguments[0], index)'>
     </BSelect>
