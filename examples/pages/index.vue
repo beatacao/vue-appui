@@ -84,13 +84,17 @@
 </script>
 
 <style lang='less' type='text/less'>
-.vueui__demo .base-component{
-    display: inline-block; vertical-align: top; width:600px; text-align:left;
-}
-.base-label{
-    display: inline-block; width:200px; text-align:right;
-}
-[class^=application-base]{
-    margin-bottom: 20px;
+.vu__application-base{
+    display: table; border-spacing: 20px;
+    [class^=application-base]{
+        display: table-row;
+        margin-bottom: 20px;
+        .base-label{
+            display: table-cell; width:200px; text-align:right; vertical-align:top; 
+        }
+        .base-component{
+            display: table-cell; min-width:600px; text-align:left; 
+        }
+    }
 }
 </style>
