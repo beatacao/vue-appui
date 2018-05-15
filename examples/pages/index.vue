@@ -56,7 +56,7 @@
 
                 for(var i=opt.index+1; i<=length-1; i++){
                     rule.options[i].options = []
-                    rule.options[i].value = ''
+                    rule.options[i].value = []
                 }
                 this.$store.state.rules.splice(opt.rIndex, 1, rule)
             },
@@ -70,7 +70,7 @@
                 } 
                 for(var i=opt.index+1; i<=length-1; i++){
                     rule.options[i].options = []
-                    rule.options[i].value = ''
+                    rule.options[i].value = []
                 }
                 this.$store.state.rules.splice(opt.rIndex, 1, rule)
             }

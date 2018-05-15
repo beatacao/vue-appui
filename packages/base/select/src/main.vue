@@ -1,6 +1,6 @@
 <template>
   <div class='vu__base-select'>
-    <el-select v-if='!multiple' v-model="currentValue" placeholder="请选择"  
+    <el-select v-if='!multiple' v-model="currentValue" :value='value' placeholder="请选择"  
       @focus='onFocus'
       @change='onChange'
       v-bind='$attrs'>
@@ -17,6 +17,7 @@
         multiple
         @focus='onFocus'
         @change='onChange'
+        :value='value'
         collapse-tags v-bind='$attrs'>
         <el-option
           v-for="item in options"
@@ -56,6 +57,11 @@
     data () {
       return {
         currentValue: this.value
+      }
+    },
+    watch: {
+      value (val) {
+        this.currentValue = val
       }
     },
     methods: {
