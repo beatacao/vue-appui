@@ -10,7 +10,7 @@
 
 <script>
     import { ElTabs } from 'element-ui'
-    import BTextarea from '~packages/base/textarea/index'
+    import BTextarea from '../../../base/textarea/index'
     export default {
         name: 'BTabs',
         data () {

@@ -14,8 +14,8 @@
 </template>
 
 <script>
-    import BDatepicker from '~packages/base/datepicker/index'
-    import BSelect from '~packages/base/select/index'
+    import BDatepicker from '../../../base/datepicker/index'
+    import BSelect from '../../../base/select/index'
 
     export default {
         name: 'BRegionMulti',

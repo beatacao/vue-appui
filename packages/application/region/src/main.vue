@@ -26,8 +26,8 @@
 </template>
 
 <script>
-    import BDatepicker from '~packages/base/datepicker/index'
-    import BInput from '~packages/base/input/index'
+    import BDatepicker from '../../../base/datepicker/index'
+    import BInput from '../../../base/input/index'
 
     export default {
         name: 'BRegion',

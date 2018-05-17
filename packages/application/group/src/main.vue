@@ -14,8 +14,8 @@
 </template>
 
 <script>
-    import BCheckbox from '~packages/base/checkbox/index'
-    import BRadio from '~packages/base/radio/index'
+    import BCheckbox from '../../../base/checkbox/index'
+    import BRadio from '../../../base/radio/index'
     export default {
         name: 'BGroup',
         data () {

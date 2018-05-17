@@ -7,7 +7,7 @@
         :placeholder='item.placeholder' 
         :name='item.name' 
         :value='item.value'
-        filterable='true'
+        filterable
         @focus='onFocus(arguments[0], index)'
         @change='onChange(arguments[0], index)'>
     </BSelect>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-    import BSelect from '~packages/base/select/index'
+    import BSelect from '../../../base/select/index'
     export default {
         name: 'BCascaderMulti',
         data () {
