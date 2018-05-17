@@ -1,4 +1,4 @@
-# vue-ui
+# vue-appui
 
 > ui components use vue2
 
