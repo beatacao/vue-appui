@@ -97,7 +97,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/beatacao/vue-ui.git"
+    "url": "git+https://github.com/beatacao/vue-appui.git"
   },
   "keywords": [
     "element-ui",
@@ -106,7 +106,7 @@
   ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/beatacao/vue-ui/issues"
+    "url": "https://github.com/beatacao/vue-appui/issues"
   },
-  "homepage": "https://github.com/beatacao/vue-ui#readme"
+  "homepage": "https://github.com/beatacao/vue-appui#readme"
 }
