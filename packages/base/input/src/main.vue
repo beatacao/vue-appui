@@ -1,5 +1,5 @@
 <template>
-  <el-input :placeholder='placeholder' v-bind='$attrs'></el-input>
+  <el-input :placeholder='placeholder' v-bind='$attrs' @change='onChange'></el-input>
 </template>
 
 <script>
@@ -15,6 +15,11 @@
     },
     created () {
       console.log(this)
+    },
+    methods: {
+      onChange (val) {
+        this.$emit('change', val)
+      }
     }
   }
 </script>

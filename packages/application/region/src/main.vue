@@ -46,7 +46,16 @@
             options: {
                 type: Array,
                 default: function () {
-                    return []
+                    return [
+                        {
+                            label: '',
+                            placeholder: ''
+                        },
+                        {
+                            label: '',
+                            placeholder: ''
+                        }
+                    ]
                 }
             },
             value: {
