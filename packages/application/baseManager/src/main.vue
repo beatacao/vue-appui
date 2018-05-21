@@ -1,7 +1,7 @@
 <template>
     <div class='vu__application-base'>
         <div v-for='(item,index) in configArray' :key='index' :class='"application-base-" + item.type'>
-            <label v-if='item.label && item.label.length>0' class="base-label">{{item.label}}</label>
+            <label v-if='item.label && item.label.length>0 && (item.type !== "tabs")' class="base-label">{{item.label}}</label>
             <div class="base-component">
                 <BInput v-if='item.type === "input"' :placeholder='item.placeholder'></BInput>
                 <BTextarea v-if='item.type === "input-multi"' :placeholder='item.placeholder'></BTextarea>
@@ -9,7 +9,7 @@
                 <BSelect v-if='item.type === "select"' :value='item.value' :options='item.options'></BSelect>
                 <BSelect v-if='item.type === "select-multi"' :custom='item.custom'  @visibleChange='visibleChange(arguments[0], index)' multiple :value='item.value' :options='item.options'></BSelect>
                 <BGroup v-if='item.type === "group"' :itemType='item.itemType' :options='item.options' :value='item.value'></BGroup>
-                <BTabs v-if='item.type === "tabs"' :options='item.options'></BTabs>
+                <BTabs v-if='item.type === "tabs"' :options='item.options' :label='item.label'></BTabs>
                 <BCascaderMulti :name='item.name' v-if='item.type === "select-ld"' :options='item.options' @focus='cascaderFocus(arguments[0], index)' @change='cascaderChange(arguments[0], index)'></BCascaderMulti>
                 <BRegionMulti v-if='item.type === "region-multi"' :name='item.name' :value='item.value' :options='item.options'></BRegionMulti>
             </div>

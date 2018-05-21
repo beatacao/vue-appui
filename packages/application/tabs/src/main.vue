@@ -1,10 +1,17 @@
 <template>
     <div class='vu__application-tabs'>
-        <el-tabs v-model="activeName">
-            <el-tab-pane v-for='(item, index) in options' :key='index' :label="item.label" :name="item.name">
-                <BTextarea :name='item.name' :value='item.value'></BTextarea>
-            </el-tab-pane>
-        </el-tabs>
+        <label v-if='label && label.length>0' class="base-label" @click='tabsVisible = true'>{{label}}</label>
+        <el-dialog
+            :title="label"
+            :visible.sync="tabsVisible"
+            :class='{visible: tabsVisible}'
+            width="30%">
+            <el-tabs v-model="activeName">
+                <el-tab-pane v-for='(item, index) in options' :key='index' :label="item.label" :name="item.name">
+                    <BTextarea :name='item.name' :value='item.value' :placeholder='item.placeholder'></BTextarea>
+                </el-tab-pane>
+            </el-tabs>
+        </el-dialog>
     </div>
 </template>
 
@@ -15,12 +22,17 @@
         name: 'BTabs',
         data () {
             return {
-                activeName: ''
+                activeName: '',
+                tabsVisible: false
             }
         },
         extends: ElTabs,
         components: {BTextarea},
         props: {
+            label: {
+                type: String,
+                default: ''
+            },
             options: {
                 type: Array,
                 default: function () {
