@@ -7,9 +7,9 @@
       v-bind='$attrs'>
         <el-option
           v-for="item in options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
+          :key="dataRename.value ? item[dataRename.value] : item.value"
+          :label="dataRename.label ? item[dataRename.label] : item.label"
+          :value="dataRename.value ? item[dataRename.value] : item.value"
           >
         </el-option>
       </el-select>
@@ -24,9 +24,9 @@
         collapse-tags v-bind='$attrs'>
         <el-option
           v-for="item in options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value">
+          :key="dataRename.value ? item[dataRename.value] : item.value"
+          :label="dataRename.label ? item[dataRename.label] : item.label"
+          :value="dataRename.value ? item[dataRename.value] : item.value">
         </el-option>
         <slot name='custom'>
           <div v-if='custom && custom.template' v-html='custom.template'></div>
@@ -61,6 +61,12 @@
       },
       custom: {
         default: null
+      },
+      dataRename: {
+        type: Object,
+        default: function () {
+          return {}
+        }
       }
     },
     data () {

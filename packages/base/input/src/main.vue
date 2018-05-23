@@ -14,7 +14,7 @@
       }
     },
     created () {
-      console.log(this)
+      // console.log(this)
     },
     methods: {
       onChange (val) {
