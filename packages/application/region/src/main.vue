@@ -19,7 +19,8 @@
                 :range-separator="split"
                 :start-placeholder="options[0].placeholder"
                 :end-placeholder="options[1].placeholder"
-                @input='timeInput'>
+                @input='timeInput'
+                :name='name'>
             </BDatepicker>
         </div>
     </div>
@@ -69,6 +70,10 @@
                 default: function () {
                     return '-'
                 }
+            },
+            name: {
+                type: String,
+                default: ''
             }
         },
         created () {
