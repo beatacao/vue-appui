@@ -1,11 +1,11 @@
 <template>
     <div class='vu__application-group'>
-        <el-checkbox-group v-if='itemType==="checkbox"' v-model="currentValue">
+        <el-checkbox-group v-if='itemType==="checkbox"' v-model="currentValue" @change='onChange'>
             <BCheckbox v-for='(item, index) in options' :key='index' :label='item.value'>
                 {{item.label}}
             </BCheckbox>
         </el-checkbox-group>
-        <el-radio-group v-else v-model="currentValue">
+        <el-radio-group v-else v-model="currentValue" @change='onChange'>
             <BRadio v-for='(item, index) in options' :key='index' :label='item.value'>
                 {{item.label}}
             </BRadio>
@@ -47,7 +47,11 @@
         created () {
             this.currentValue = this.value
         },
-        methods: {},
+        methods: {
+            onChange (val) {
+                this.$emit('change', val)
+            }
+        },
         mounted () {
             console.log('BAppSelectLine mounted!')
         }

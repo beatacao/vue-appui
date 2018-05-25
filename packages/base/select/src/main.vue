@@ -1,6 +1,6 @@
 <template>
   <div class='vu__base-select'>
-    <el-select v-if='!multiple' v-model="currentValue" :value='value' :placeholder="placeholder"  
+    <el-select v-if='!multiple && !group' v-model="currentValue" :value='value' :placeholder="placeholder"  
       @focus='onFocus'
       @change='onChange'
       @visible-change='visibleChange'
@@ -13,7 +13,7 @@
           >
         </el-option>
       </el-select>
-      <el-select v-if='multiple'
+      <el-select v-if='multiple && !group'
         v-model="currentValue"
         multiple
         @focus='onFocus'
@@ -32,6 +32,47 @@
           <div v-if='custom && custom.template' v-html='custom.template'></div>
         </slot>
       </el-select>
+      <el-select v-if='!multiple && group' v-model="currentValue" :value='value' :placeholder="placeholder"  
+        @focus='onFocus'
+        @change='onChange'
+        @visible-change='visibleChange'
+        v-bind='$attrs'>
+        <el-option-group 
+          v-for="group in options"
+          :key="group.label"
+          :label="group.label">
+          <el-option
+            v-for="item in group.options"
+            :key="dataRename.value ? item[dataRename.value] : item.value"
+            :label="dataRename.label ? item[dataRename.label] : item.label"
+            :value="dataRename.value ? item[dataRename.value] : item.value">
+          </el-option>
+        </el-option-group>
+        </el-select>
+        <el-select v-if='multiple && group'
+          v-model="currentValue"
+          multiple
+          @focus='onFocus'
+          @change='onChange'
+          @visible-change='visibleChange'
+          :value='value'
+          :placeholder="placeholder" 
+          collapse-tags v-bind='$attrs'>
+          <el-option-group 
+            v-for="group in options"
+            :key="group.label"
+            :label="group.label">
+            <el-option
+              v-for="item in group.options"
+              :key="dataRename.value ? item[dataRename.value] : item.value"
+              :label="dataRename.label ? item[dataRename.label] : item.label"
+              :value="dataRename.value ? item[dataRename.value] : item.value">
+            </el-option>
+          </el-option-group>
+          <slot name='custom'>
+            <div v-if='custom && custom.template' v-html='custom.template'></div>
+          </slot>
+        </el-select>
   </div>
 </template>
 
@@ -67,6 +108,10 @@
         default: function () {
           return {}
         }
+      },
+      group: {
+        type: Boolean,
+        default: false
       }
     },
     data () {

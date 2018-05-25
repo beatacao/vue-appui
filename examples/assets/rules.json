@@ -62,6 +62,10 @@
             "unit": null,
             "deps": null,
             "search": false,
+            "request": {
+                "type": "api-rule",
+                "config": "${'get'}/${'/goodsSelection/attributeValue'}/${1}"
+            },
             "options": [
                 {
                     "label": "畅销款",
