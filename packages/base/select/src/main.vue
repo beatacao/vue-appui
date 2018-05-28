@@ -12,6 +12,9 @@
           :value="dataRename.value ? item[dataRename.value] : item.value"
           >
         </el-option>
+        <slot name='custom'>
+          <div v-if='custom && custom.template' v-html='custom.template'></div>
+        </slot>
       </el-select>
       <el-select v-if='multiple && !group'
         v-model="currentValue"
@@ -48,6 +51,9 @@
             :value="dataRename.value ? item[dataRename.value] : item.value">
           </el-option>
         </el-option-group>
+        <slot name='custom'>
+          <div v-if='custom && custom.template' v-html='custom.template'></div>
+        </slot>
         </el-select>
         <el-select v-if='multiple && group'
           v-model="currentValue"

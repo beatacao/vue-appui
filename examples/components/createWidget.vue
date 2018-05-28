@@ -31,7 +31,7 @@
                 dialogVisible: false,
                 form: {
                     componentType: null
-                },
+                }, 
                 componentProps: [
                     {
                         label: '控件名称',
