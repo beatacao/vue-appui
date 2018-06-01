@@ -1,20 +1,20 @@
 <template>
     <div class='vu__application-base-manager'>
         <div v-for='(item,index) in configArray' :key='index' :class='"application-base-" + item.type'>
-            <label v-if='item.label && item.label.length>0 && (item.type !== "tabs")' class="base-label">{{item.label}}</label>
+            <label v-if='item.label && item.label.length>0' class="base-label">{{item.label}}</label>
             <div class="base-component">
                 <BInput v-if='item.type === "input"' :placeholder='item.placeholder' :name='item.name'></BInput>
-                <BTextarea v-if='item.type === "input-multi"' :placeholder='item.placeholder' :name='item.name'></BTextarea>
+                <BTextarea v-if='item.type === "input-multi"' :placeholder='item.placeholder' :name='item.name' :label='item.label'></BTextarea>
                 <BRegion v-if='item.type === "region"' :itemType='item.itemType' :options='item.options'></BRegion>
                 <BSelect v-if='item.type === "select"' :custom='item.custom' :value='item.value' :options='item.options' :name='item.name'></BSelect>
                 <BSelect v-if='item.type === "select-multi"' :custom='item.custom'  @visibleChange='visibleChange(arguments[0], index)' multiple :value='item.value' :options='item.options' :name='item.name'></BSelect>
                 <BGroup v-if='item.type === "group"' :itemType='item.itemType' :options='item.options' :value='item.value'></BGroup>
                 <BTabs v-if='item.type === "tabs"' :options='item.options' :label='item.label' :name='item.name'></BTabs>
-                <BCascaderMulti :name='item.name' v-if='item.type === "select-ld"' :options='item.options' @focus='cascaderFocus(arguments[0], index)' @change='cascaderChange(arguments[0], index)'></BCascaderMulti>
+                <BCascaderMulti :name='item.name' v-if='item.type === "select-ld" || item.type === "select-ld-tree"' :options='item.options' @focus='cascaderFocus(arguments[0], index)' @change='cascaderChange(arguments[0], index)'></BCascaderMulti>
                 <BRegionMulti v-if='item.type === "region-multi"' :name='item.name' :value='item.value' :options='item.options'></BRegionMulti>
             </div>
-            <div class="base-tip" v-if='item.tip && item.tip.content.length>0'>
-                <BTip :content='item.tip.content'></BTip>
+            <div class="base-tip" v-if='item.hasTip && item.tipContent.length>0'>
+                <BTip :content='item.tipContent'></BTip>
             </div>
             <span class='el-icon-edit b-icon' @click='edit(index)' title='编辑'></span>
             <span class='el-icon-close b-icon' @click='del(index)' title='删除'></span>
@@ -97,6 +97,9 @@
             .b-icon.el-icon-edit{
                 margin-right:35px;
             }
+        }
+        .application-base-tabs>.base-label, .application-base-input-multi>.base-label{
+            display:none;
         }
     }
 </style>
