@@ -47,6 +47,11 @@
         created () {
             this.currentValue = this.value
         },
+        watch: {
+            value (val, val1) {
+                this.currentValue = val
+            }
+        },
         methods: {
             onChange (val) {
                 this.$emit('change', val)
