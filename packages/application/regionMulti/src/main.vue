@@ -65,13 +65,13 @@
             this.options.forEach(function (v, i) {
                 if (v.value === self.value) {
                     var value = ''
-                    if (v.options[0].value.length > 0 && v.options[1].value.length > 0) {
+                    if (v.options && v.options[0].value.length > 0 && v.options[1].value.length > 0) {
                         value = [v.options[0].value, v.options[1].value]
                     }
                     current = {
                         'value': value,
-                        'startPlaceholder': v.options[0].placeholder,
-                        'endPlaceholder': v.options[1].placeholder
+                        'startPlaceholder': v.options ? v.options[0].placeholder : '',
+                        'endPlaceholder': v.options ? v.options[1].placeholder : ''
                     }
                 }
             })
@@ -83,13 +83,13 @@
                 this.options.forEach(function (v, i) {
                     if (v.value === val) {
                         var value = ''
-                        if (v.options[0].value.length > 0 && v.options[1].value.length > 0) {
+                        if (v.options && v.options[0].value.length > 0 && v.options[1].value.length > 0) {
                             value = [v.options[0].value, v.options[1].value]
                         }
                         current = {
                             'value': value,
-                            'startPlaceholder': v.options[0].placeholder,
-                            'endPlaceholder': v.options[1].placeholder
+                            'startPlaceholder': v.options ? v.options[0].placeholder : '',
+                            'endPlaceholder': v.options ? v.options[1].placeholder : ''
                         }
                     }
                 })

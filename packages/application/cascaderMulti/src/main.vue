@@ -43,13 +43,7 @@
         },
         methods: {
             onFocus (e, index) {
-                var options = this.options[index].options
-                if ((index > 0) && (!this.options[index - 1].value || this.options[index - 1].value.length === 0)) {
-                    return
-                }
-                if (!options || options.length === 0) {
-                    this.$emit('focus', {name: this.name, subName: this.options[index].name, index: index})
-                }
+                this.$emit('focus', {name: this.name, subName: this.options[index].name, index: index})
             },
             onChange (val, index) {
                 this.$emit('change', {name: this.name, subName: this.options[index].name, value: val, index: index})
