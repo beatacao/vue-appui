@@ -1,6 +1,6 @@
 <template>
-  <div class='vu__base-select'>
-    <el-select v-if='!multiple && !group' v-model="currentValue" :value='value' :placeholder="placeholder"  
+  <div class='vu__base-select' :class='{selected: selectedLength>0 || currentValue.length>0}'>
+    <el-b-select v-if='!multiple && !group' v-model="currentValue" :value='value' :placeholder="placeholder"  
       @focus='onFocus'
       @change='onChange'
       @visible-change='visibleChange'
@@ -13,10 +13,13 @@
           >
         </el-option>
         <slot name='custom'>
-          <div v-if='custom && custom.template' v-html='custom.template'></div>
+            <div v-if='custom &&  Object.keys(custom).length>0'>
+                <input type="text" name="custom-min" :min="custom.valueMin" v-model='custom.customMin'>{{custom.unit||""}} - <input type="text" name="custom-max"  :max="custom.valueMax" v-model='custom.customMax'>{{custom.unit||""}}
+            </div>
         </slot>
-      </el-select>
-      <el-select v-if='multiple && !group'
+      </el-b-select>
+      <el-b-select v-if='multiple && !group'
+        ref='select'
         v-model="currentValue"
         multiple
         @focus='onFocus'
@@ -32,10 +35,12 @@
           :value="dataRename.value ? item[dataRename.value] : item.value">
         </el-option>
         <slot name='custom'>
-          <div v-if='custom && custom.template' v-html='custom.template'></div>
+            <div v-if='custom &&  Object.keys(custom).length>0'>
+                <input type="text" name="custom-min" :min="custom.valueMin" v-model='custom.customMin'>{{custom.unit||""}} - <input type="text" name="custom-max"  :max="custom.valueMax" v-model='custom.customMax'>{{custom.unit||""}}
+            </div>
         </slot>
-      </el-select>
-      <el-select v-if='!multiple && group' v-model="currentValue" :value='value' :placeholder="placeholder"  
+      </el-b-select>
+      <el-b-select v-if='!multiple && group' v-model="currentValue" :value='value' :placeholder="placeholder"  
         @focus='onFocus'
         @change='onChange'
         @visible-change='visibleChange'
@@ -52,10 +57,12 @@
           </el-option>
         </el-option-group>
         <slot name='custom'>
-          <div v-if='custom && custom.template' v-html='custom.template'></div>
+            <div v-if='custom &&  Object.keys(custom).length>0'>
+                <input type="text" name="custom-min" :min="custom.valueMin" v-model='custom.customMin'>{{custom.unit||""}} - <input type="text" name="custom-max"  :max="custom.valueMax" v-model='custom.customMax'>{{custom.unit||""}}
+            </div>
         </slot>
-        </el-select>
-        <el-select v-if='multiple && group'
+        </el-b-select>
+        <el-b-select v-if='multiple && group'
           v-model="currentValue"
           multiple
           @focus='onFocus'
@@ -76,18 +83,21 @@
             </el-option>
           </el-option-group>
           <slot name='custom'>
-            <div v-if='custom && custom.template' v-html='custom.template'></div>
+            <div v-if='custom &&  Object.keys(custom).length>0'>
+                <input type="text" name="custom-min" :min="custom.valueMin" v-model='custom.customMin'>{{custom.unit||""}} - <input type="text" name="custom-max"  :max="custom.valueMax" v-model='custom.customMax'>{{custom.unit||""}}
+            </div>
           </slot>
-        </el-select>
+        </el-b-select>
   </div>
 </template>
 
 <script>
-  import {ElSelect} from 'element-ui'
+  import ElBSelect from './elselect/select.vue'
 
   export default {
     name: 'BSelect',
-    extends: ElSelect,
+    extends: ElBSelect,
+    components: {ElBSelect},
     props: {
       value: {
         default: ''
@@ -122,7 +132,8 @@
     },
     data () {
       return {
-        currentValue: this.value
+        currentValue: this.value || '',
+        selectedLength: 0
       }
     },
     watch: {
@@ -135,9 +146,15 @@
         this.$emit('focus', e)
       },
       onChange (v) {
+        this.selectedLength = v.length
         this.$emit('change', v)
       },
       visibleChange (isVisible) {
+        if (!isVisible) {
+          if (this.custom && Object.keys(this.custom).length > 0 && !isNaN(parseInt(this.custom.valueMin)) && !isNaN(parseInt(this.custom.valueMax))) {
+            this.$emit('change', parseInt(this.custom.valueMin) + '#' + parseInt(this.custom.valueMax))
+          }
+        }
         this.$emit('visibleChange', isVisible)
       }
     }
