@@ -8,6 +8,7 @@
         :name='item.name' 
         :value='item.value'
         filterable
+        :displayTags='displayTags'
         @focus='onFocus(arguments[0], index)'
         @change='onChange(arguments[0], index)'>
     </BSelect>
@@ -33,6 +34,10 @@
             name: {
                 type: String,
                 default: ''
+            },
+            displayTags: {
+                type: Boolean,
+                default: true
             }
         },
         created () {

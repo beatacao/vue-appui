@@ -1,7 +1,10 @@
 <template>
-  <div :class='{"vu__base-textarea": true, tab: isTab}'>
-      <label v-if='label && label.length>0' class="base-label" @click='labelClick'>{{label}}</label>
-      <el-input v-show='!isTab || showTextarea' class='base-textarea' type='textarea' v-bind='$attrs' @change='onChange'></el-input>
+  <div :class='{"vu__base-textarea": true, tab: isTab, hasvalue: value&&value.length>0}'>
+      <label v-if='label && label.length>0' class="base-label" @click='labelClick'>
+        {{label}}
+        <span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-select__caret el-input__icon el-icon-arrow-up" :class='{"is-reverse": showTextarea}'></i> </span></span>
+      </label>
+      <el-input ref='textarea' v-show='!isTab || showTextarea' class='base-textarea' type='textarea' v-bind='$attrs' :value='value' :rows='rows'  @change='onChange' @blur='onBlur'></el-input>
   </div>
 </template>
 
@@ -24,10 +27,19 @@
       isTab: {
         type: Boolean,
         default: true
-      }
+      },
+      rows: {
+        type: Number,
+        default: 5
+      },
+      value: ''
     },
     methods: {
+      onBlur () {
+        this.showTextarea = false
+      },
       onChange (val) {
+        this.value = val
         this.$emit('change', val)
       },
       labelClick () {

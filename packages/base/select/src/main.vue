@@ -27,6 +27,7 @@
         @visible-change='visibleChange'
         :value='value'
         :placeholder="placeholder" 
+        :displayTags='displayTags'
         collapse-tags v-bind='$attrs'>
         <el-option
           v-for="item in options"
@@ -70,6 +71,7 @@
           @visible-change='visibleChange'
           :value='value'
           :placeholder="placeholder" 
+          :displayTags='displayTags'
           collapse-tags v-bind='$attrs'>
           <el-option-group 
             v-for="group in options"
@@ -128,6 +130,10 @@
       group: {
         type: Boolean,
         default: false
+      },
+      displayTags: {
+        type: Boolean,
+        default: true
       }
     },
     data () {
