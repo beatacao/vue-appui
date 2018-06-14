@@ -289,7 +289,7 @@
       collapseTags: Boolean,
       popperAppendToBody: {
         type: Boolean,
-        default: true
+        default: false
       },
       displayTags: {
         type: Boolean,
