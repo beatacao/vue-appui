@@ -97,6 +97,56 @@
             .b-icon.el-icon-edit{
                 margin-right:35px;
             }
+            &.application-base-input-multi{
+                position:relative;
+                .vu__base-textarea.tab{
+                    position:relative; margin-left:100px;
+                    &.hasvalue{
+                        &>.base-label{
+                            border-color: #409EFF; color:#409EFF;
+                        }
+                    }
+                    &>.base-label{
+                        display:inline-block; width:auto; 
+                        padding: 0 20px;
+                        border: 1px solid #dcdfe6;
+                        border-radius: 4px;
+                        height: 40px;
+                        line-height: 40px;
+                        padding-right:40px; color: #606266;
+                    }
+                    .base-textarea{
+                        position: absolute; top:40px; left:0; z-index: 1001;
+                        border: 1px solid #e4e7ed;
+                        border-radius: 4px;
+                        background-color: #fff;
+                        -webkit-box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+                        box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+                        -webkit-box-sizing: border-box;
+                        box-sizing: border-box;
+                        margin: 5px 0;  padding: 10px 15px;  min-width: 300px;
+                    }
+                    .el-select__caret {
+                        color: #c0c4cc;
+                        font-size: 14px;
+                        -webkit-transition: -webkit-transform .3s;
+                        transition: -webkit-transform .3s;
+                        transition: transform .3s;
+                        transition: transform .3s, -webkit-transform .3s;
+                        transition: transform .3s,-webkit-transform .3s;
+                        -webkit-transform: rotateZ(180deg);
+                        -ms-transform: rotate(180deg);
+                        transform: rotateZ(180deg);
+                        line-height: 16px;
+                        cursor: pointer;
+                    }
+                    .el-select__caret.is-reverse {
+                        -webkit-transform: rotateZ(0);
+                        -ms-transform: rotate(0);
+                        transform: rotateZ(0);
+                    }
+                } 
+            }
         }
         .application-base-tabs>.base-label, .application-base-input-multi>.base-label{
             display:none;

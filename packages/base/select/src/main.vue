@@ -145,6 +145,9 @@
     watch: {
       value (val) {
         this.currentValue = val
+        if (!val || val.length === 0) {
+          this.selectedLength = 0
+        }
       }
     },
     methods: {
