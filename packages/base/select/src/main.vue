@@ -19,6 +19,9 @@
         </slot>
       </el-b-select>
       <el-b-select v-if='multiple && !group'
+        :remote='remote'
+        :filterable='remote'
+        @queryChange="queryChange"
         ref='select'
         v-model="currentValue"
         multiple
@@ -64,6 +67,9 @@
         </slot>
         </el-b-select>
         <el-b-select v-if='multiple && group'
+          :remote='remote'
+          :filterable='remote'
+          @queryChange="queryChange"
           v-model="currentValue"
           multiple
           @focus='onFocus'
@@ -134,6 +140,10 @@
       displayTags: {
         type: Boolean,
         default: true
+      },
+      remote: {
+        type: Boolean,
+        default: false
       }
     },
     data () {
@@ -165,6 +175,11 @@
           }
         }
         this.$emit('visibleChange', isVisible)
+      },
+      queryChange (val) {
+        if (val && val.length > 0) {
+          this.$emit('remoteMethod', val)
+        }
       }
     }
   }

@@ -41,7 +41,6 @@
         <span class="el-select__tags-text">{{ item.currentLabel }}</span>
       </el-tag>
     </transition-group>
-
     <input
       type="text"
       class="el-select__input"
@@ -68,11 +67,41 @@
       :style="{ width: inputLength + 'px', 'max-width': inputWidth - 42 + 'px' }"
       ref="input">
   </div>
+  <div
+  class="el-select__tags"
+  v-if="remote && filterable"
+  ref="tags" style="width:100%">
+  <input
+    type="text"
+    class="el-select__input"
+    :class="[selectSize ? `is-${ selectSize }` : '']"
+    :disabled="selectDisabled"
+    :autocomplete="autoComplete"
+    @focus="handleFocus"
+    @blur="softFocus = false"
+    @click.stop
+    @keyup="managePlaceholder"
+    @keydown="resetInputState"
+    @keydown.down.prevent="navigateOptions('next')"
+    @keydown.up.prevent="navigateOptions('prev')"
+    @keydown.enter.prevent="selectOption"
+    @keydown.esc.stop.prevent="visible = false"
+    @keydown.delete="deletePrevTag"
+    @compositionstart="handleComposition"
+    @compositionupdate="handleComposition"
+    @compositionend="handleComposition"
+    v-model="query"
+    :placeholder='placeholder'
+    @input="e => handleQueryChange(e.target.value)"
+    :debounce="remote ? 300 : 0"
+    style="width:100%"
+    ref="input">
+</div>
     <el-input
       ref="reference"
       v-model="selectedLabel"
       type="text"
-      :placeholder="placeholder"
+      :placeholder="remote && filterable ? '' : placeholder"
       :name="name"
       :id="id"
       :auto-complete="autoComplete"
@@ -447,6 +476,8 @@
           if (this.visible) this.broadcast('ElSelectDropdown', 'updatePopper');
         });
         this.hoverIndex = -1;
+
+        this.$emit('queryChange', val)
         if (this.multiple && this.filterable) {
           const length = this.$refs.input.value.length * 15 + 20;
           this.inputLength = this.collapseTags ? Math.min(50, length) : length;

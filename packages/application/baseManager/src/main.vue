@@ -7,7 +7,7 @@
                 <BTextarea v-if='item.type === "input-multi"' :placeholder='item.placeholder' :name='item.name' :label='item.label'></BTextarea>
                 <BRegion v-if='item.type === "region"' :itemType='item.itemType' :options='item.options'></BRegion>
                 <BSelect v-if='item.type === "select"' :custom='item.custom' :value='item.value' :options='item.options' :name='item.name'></BSelect>
-                <BSelect v-if='item.type === "select-multi"' :custom='item.custom'  @visibleChange='visibleChange(arguments[0], index)' multiple :value='item.value' :options='item.options' :name='item.name'></BSelect>
+                <BSelect v-if='item.type === "select-multi"' :custom='item.custom'  @visibleChange='visibleChange(arguments[0], index)' multiple :value='item.value' :options='item.options' :name='item.name' :displayTags='false' :remote='item.isSearch === 0'></BSelect>
                 <BGroup v-if='item.type === "group"' :itemType='item.itemType' :options='item.options' :value='item.value'></BGroup>
                 <BTabs v-if='item.type === "tabs"' :options='item.options' :label='item.label' :name='item.name'></BTabs>
                 <BCascaderMulti :name='item.name' v-if='item.type === "select-ld" || item.type === "select-ld-tree"' :options='item.options' @focus='cascaderFocus(arguments[0], index)' @change='cascaderChange(arguments[0], index)'></BCascaderMulti>
