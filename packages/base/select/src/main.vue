@@ -5,6 +5,7 @@
       @change='onChange'
       @visible-change='visibleChange'
       v-bind='$attrs'>
+        <span slot='inputPrev' class='requiredIcon' v-if='required'>*</span>
         <el-option
           v-for="item in options"
           :key="dataRename.value ? item[dataRename.value] : item.value"
@@ -32,6 +33,7 @@
         :placeholder="placeholder" 
         :displayTags='displayTags'
         collapse-tags v-bind='$attrs'>
+        <span slot='inputPrev' class='requiredIcon' v-if='required'>*</span>
         <el-option
           v-for="item in options"
           :key="dataRename.value ? item[dataRename.value] : item.value"
@@ -49,6 +51,7 @@
         @change='onChange'
         @visible-change='visibleChange'
         v-bind='$attrs'>
+        <span slot='inputPrev' class='requiredIcon' v-if='required'>*</span>
         <el-option-group 
           v-for="group in options"
           :key="group.label"
@@ -79,6 +82,7 @@
           :placeholder="placeholder" 
           :displayTags='displayTags'
           collapse-tags v-bind='$attrs'>
+          <span slot='inputPrev' class='requiredIcon' v-if='required'>*</span>
           <el-option-group 
             v-for="group in options"
             :key="group.label"
@@ -142,6 +146,10 @@
         default: true
       },
       remote: {
+        type: Boolean,
+        default: false
+      },
+      required: {
         type: Boolean,
         default: false
       }

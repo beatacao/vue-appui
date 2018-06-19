@@ -2,6 +2,7 @@
     <div class='vu__application-cascader-multi'>
     <template v-for='(item, index) in options'>
        <BSelect 
+        :required='required && index<1'
         :key='index' multiple 
         :options='item.options' 
         :placeholder='item.placeholder' 
@@ -37,6 +38,10 @@
             displayTags: {
                 type: Boolean,
                 default: true
+            },
+            required: {
+                type: Boolean,
+                default: false
             }
         },
         created () {

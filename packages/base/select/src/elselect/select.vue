@@ -97,6 +97,7 @@
     style="width:100%"
     ref="input">
 </div>
+    <slot name='inputPrev'></slot>
     <el-input
       ref="reference"
       v-model="selectedLabel"
