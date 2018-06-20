@@ -1,5 +1,5 @@
 <template>
-  <div class='vu__base-select' :class='{selected: selectedLength>0 || currentValue.length>0}'>
+  <div class='vu__base-select' :class='{selected: selectedLength>0 || (currentValue && currentValue.length>0)}'>
     <el-b-select v-if='!multiple && !group' v-model="currentValue" :value='value' :placeholder="placeholder"  
       @focus='onFocus'
       @change='onChange'

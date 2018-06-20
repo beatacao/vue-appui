@@ -1,7 +1,7 @@
 <template>
     <div class='vu__application-base-manager'>
         <div v-for='(item,index) in configArray' :key='index' :class='"application-base-" + item.type'>
-            <label v-if='item.label && item.label.length>0' class="base-label">{{item.label}}</label>
+            <label v-if='item.markname && item.markname.length>0' class="base-label">{{item.markname}}</label>
             <div class="base-component">
                 <BInput v-if='item.type === "input"' :placeholder='item.placeholder' :name='item.name'></BInput>
                 <BTextarea v-if='item.type === "input-multi"' :placeholder='item.placeholder' :name='item.name' :label='item.label'></BTextarea>

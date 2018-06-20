@@ -37,6 +37,7 @@
     methods: {
       onBlur () {
         this.showTextarea = false
+        this.$emit('blur')
       },
       onChange (val) {
         this.value = val
