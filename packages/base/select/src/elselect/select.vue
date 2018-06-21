@@ -324,13 +324,18 @@
       displayTags: {
         type: Boolean,
         default: true
-      }
-      // options: [],
+      },
+      options: {
+        type: Array,
+        default: function(){
+          return []
+        }
+      },
     },
 
     data() {
       return {
-        options: [],
+        // options: [],
         cachedOptions: [],
         createdLabel: null,
         createdSelected: false,

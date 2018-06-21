@@ -40,7 +40,6 @@
         this.$emit('blur')
       },
       onChange (val) {
-        this.value = val
         this.$emit('change', val)
       },
       labelClick () {
