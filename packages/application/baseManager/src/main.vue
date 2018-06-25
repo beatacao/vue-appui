@@ -1,6 +1,6 @@
 <template>
     <div class='vu__application-base-manager'>
-        <div v-for='(item,index) in configArray' :key='index' :class='"application-base-" + item.type'>
+        <div v-for='(item,index) in configArray' :key='index' :class='"application-base-" + item.type' :disabled='item.isUse===1'>
             <label v-if='item.markname && item.markname.length>0' class="base-label">{{item.markname}}</label>
             <div class="base-component">
                 <BInput v-if='item.type === "input"' :placeholder='item.placeholder' :name='item.name'></BInput>
@@ -18,8 +18,9 @@
             <div class="base-tip" v-if='item.hasTip && item.tipContent.length>0'>
                 <BTip :content='item.tipContent'></BTip>
             </div>
-            <span class='el-icon-edit b-icon' @click='edit(index)' title='编辑'></span>
-            <span class='el-icon-close b-icon' @click='del(index)' title='删除'></span>
+            <span class='el-icon-edit b-icon' v-if='item.isUse===0' @click='edit(index)' title='编辑'></span>
+            <span class='el-icon-close b-icon' v-if='item.isUse===0' @click='del(index)' title='删除'></span>
+            <span class='el-icon-back b-icon' v-if='item.isUse===1' @click='del(index)' title='启用'></span>
             <!-- <div class="base-validator">
                 <BValidator v-if='item.validator'></BValidator>
             </div> -->
