@@ -46,9 +46,9 @@
         this.showTextarea = false
         this.$emit('blur')
       },
-      onChange (val, type) {
+      onChange (val, name) {
         if (this.reverse) {
-          this.$emit('change', {value: val, type: type})
+          this.$emit('change', {value: val, name: name})
         } else {
           this.$emit('change', val)
         }

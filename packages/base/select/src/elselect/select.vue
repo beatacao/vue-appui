@@ -277,7 +277,7 @@
 
     props: {
       name: String,
-      id: String,
+      id: String | Number,
       value: {
         required: true
       },
