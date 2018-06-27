@@ -94,11 +94,13 @@
                     }
                 })
                 this.current = Object.assign({}, current)
+                this.$emit('change', {value: val, name: 'type'})
             },
             timeInput (val) {
                 this.current = Object.assign(this.current, {
                     value: val
                 })
+                this.$emit('change', {value: val, name: 'time'})
             }
         },
         mounted () {

@@ -178,8 +178,8 @@
       },
       visibleChange (isVisible) {
         if (!isVisible) {
-          if (this.custom && Object.keys(this.custom).length > 0 && !isNaN(parseInt(this.custom.valueMin)) && !isNaN(parseInt(this.custom.valueMax))) {
-            this.$emit('change', parseInt(this.custom.valueMin) + '#' + parseInt(this.custom.valueMax))
+          if (this.custom && Object.keys(this.custom).length > 0 && !isNaN(parseInt(this.custom.customMin)) && !isNaN(parseInt(this.custom.customMax))) {
+            this.$emit('change', [parseInt(this.custom.customMin) + '#' + parseInt(this.custom.customMax)])
           }
         }
         this.$emit('visibleChange', isVisible)
