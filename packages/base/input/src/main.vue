@@ -1,5 +1,5 @@
 <template>
-  <el-input :placeholder='placeholder' v-bind='$attrs' @change='onChange'></el-input>
+  <el-input :style='{"min-width": 8*placeholder.length*2 + "px"}' :placeholder='placeholder' v-bind='$attrs' @change='onChange'></el-input>
 </template>
 
 <script>
