@@ -6,7 +6,8 @@
                     v-bind='$attrs'
                     :placeholder='item.placeholder' 
                     :value='item.value' 
-                    :name='item.name'>
+                    :name='item.name'
+                    @change='onChange(arguments[0], index)'>
                 </BInput>
                 <span v-if='index < (options.length-1)'>{{split}}</span>
             </div>
@@ -82,6 +83,9 @@
         methods: {
             timeInput (val) {
                 this.currentValue = val
+            },
+            onChange (v, index) {
+                this.$emit('change', {value: v, index: index})
             }
         },
         mounted () {

@@ -39,6 +39,24 @@
           :key="dataRename.value ? item[dataRename.value] : item.value"
           :label="dataRename.label ? item[dataRename.label] : item.label"
           :value="dataRename.value ? item[dataRename.value] : item.value">
+          <span>{{dataRename.label ? item[dataRename.label] : item.label}}</span>
+          <div class='child' v-if='item.childs && item.childs.length>0'>
+            <el-option 
+              v-for='citem in item.childs'
+              :key="dataRename.value ? citem[dataRename.value] : citem.value"
+              :label="dataRename.label ? citem[dataRename.label] : citem.label"
+              :value="dataRename.value ? citem[dataRename.value] : citem.value">
+                <span>{{dataRename.label ? citem[dataRename.label] : citem.label}}</span>
+                <div class='gchild' v-if='citem.childs && citem.childs.length>0'>
+                  <el-option 
+                    v-for='gitem in citem.childs'
+                    :key="dataRename.value ? gitem[dataRename.value] : gitem.value"
+                    :label="dataRename.label ? gitem[dataRename.label] : gitem.label"
+                    :value="dataRename.value ? gitem[dataRename.value] : gitem.value">
+                  </el-option>
+                </div>
+            </el-option>
+          </div>
         </el-option>
         <slot name='custom'>
             <div v-if='custom &&  Object.keys(custom).length>0'>
