@@ -88,7 +88,8 @@ const webpackConfig = merge(base, {
     path: path.join(__dirname, '../lib'),
     filename: '[name].js',
     library: 'vue-appui',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    umdNamedDefine: true
     // auxiliaryComment: 'Test Comment'
   },
   // output: {
