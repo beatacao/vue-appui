@@ -2,7 +2,7 @@
  * @author Beatacao
  */
 import eleui from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+// import 'element-ui/lib/theme-chalk/index.css'
 
 import BCheckbox from '../packages/base/checkbox/index'
 import BDatepicker from '../packages/base/datepicker/index'
