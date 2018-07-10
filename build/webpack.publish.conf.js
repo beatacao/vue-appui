@@ -86,8 +86,15 @@ const webpackConfig = merge(base, {
   },
   output: {
     path: path.join(__dirname, '../lib'),
-    filename: '[name].js'
+    filename: '[name].js',
+    library: 'vue-appui',
+    libraryTarget: 'umd'
+    // auxiliaryComment: 'Test Comment'
   },
+  // output: {
+  //   path: path.join(__dirname, '../lib'),
+  //   filename: '[name].js'
+  // },
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue
     // source contains it (although only uses it if it's native).
