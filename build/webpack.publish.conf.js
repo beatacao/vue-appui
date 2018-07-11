@@ -62,7 +62,11 @@ const base = {
             image: 'xlink:href'
           }
         }
-      }
+      },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract(['css-loader', 'postcss-loader'])
+    }
     ]
   }
 }
@@ -78,7 +82,7 @@ const webpackConfig = merge(base, {
   devtool: '#source-map',
   context: path.join(__dirname, '../src'),
   entry: {
-      'ui': ['./index.js']
+      'index': ['./index.js']
       // 'vendor': ['vue', 'element-ui']
   },
   resolve: {
@@ -87,7 +91,7 @@ const webpackConfig = merge(base, {
   output: {
     path: path.join(__dirname, '../lib'),
     filename: '[name].js',
-    library: 'vue-appui',
+    // library: 'vue-appui',
     libraryTarget: 'umd',
     umdNamedDefine: true
     // auxiliaryComment: 'Test Comment'
@@ -124,7 +128,7 @@ const webpackConfig = merge(base, {
     }),
     // extract css into its own file
     new ExtractTextPlugin({
-      filename: 'css/[name].css',
+      filename: 'app.css',
       // Setting the following option to `false` will not extract CSS from codesplit chunks.
       // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
       // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`, 
@@ -175,19 +179,19 @@ const webpackConfig = merge(base, {
     // }),
     // // extract webpack runtime and module manifest to its own file in order to
     // // prevent vendor hash from being updated whenever app bundle is updated
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'manifest',
-      minChunks: Infinity
-    }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'manifest',
+    //   minChunks: Infinity
+    // }),
     // // This instance extracts shared chunks from code splitted chunks and bundles them
     // // in a separate chunk, similar to the vendor chunk
     // // see: https://webpack.js.org/plugins/commons-chunk-plugin/#extra-async-commons-chunk
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'ui',
-      async: 'vendor-async',
-      children: true,
-      minChunks: 3
-    })
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'ui',
+    //   async: 'vendor-async',
+    //   children: true,
+    //   minChunks: 3
+    // })
 
     // copy custom static assets
     // new CopyWebpackPlugin([

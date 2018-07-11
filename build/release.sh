@@ -10,19 +10,14 @@ then
   echo "Releasing $VERSION ..."
 
   # build
+  echo "Building $VERSION ..."
   VERSION=$VERSION npm run pub
 
-  # publish theme
-#   echo "Releasing theme-default $VERSION ..."
-#   cd packages/theme-default
-#   npm version $VERSION --message "[release] $VERSION"
-#   if [[ $VERSION =~ "beta" ]]
-#   then
-#     npm publish --tag beta
-#   else
-#     npm publish
-#   fi
-#   cd ../..
+  # build theme
+  echo "Building theme-default $VERSION ..."
+  cd packages/theme-default
+  VERSION=$VERSION npm run build
+  cd ../..
 
   # commit
   git add -A
@@ -30,16 +25,13 @@ then
   npm version $VERSION --message "[release] $VERSION"
 
   # publish
-#   git push eleme master
-#   git push eleme refs/tags/v$VERSION
-#   git checkout dev
-#   git rebase master
-#   git push eleme dev
+  git push vue-ui master
+  git push vue-ui refs/tags/v$VERSION
 
-#   if [[ $VERSION =~ "beta" ]]
-#   then
-#     npm publish --tag beta
-#   else
-#     npm publish
-#   fi
+  if [[ $VERSION =~ "beta" ]]
+  then
+    npm publish --tag beta
+  else
+    npm publish
+  fi
 fi

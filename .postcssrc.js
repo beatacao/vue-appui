@@ -1,10 +1,6 @@
-// https://github.com/michael-ciniawsky/postcss-load-config
+var autoprefixer = require('autoprefixer')
+var browserslist = require('browserslist')
 
 module.exports = {
-  "plugins": {
-    "postcss-import": {},
-    "postcss-url": {},
-    // to edit target browsers: use "browserslist" field in package.json
-    "autoprefixer": {}
-  }
+    plugins: [autoprefixer({browsers: browserslist('last 2 version, > 0.1%')})]
 }
