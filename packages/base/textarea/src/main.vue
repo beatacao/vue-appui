@@ -2,6 +2,7 @@
   <div :class='{"vu__base-textarea": true, tab: isTab, hasvalue: value&&value.length>0}'>
       <label v-if='label && label.length>0' class="base-label" @click='labelClick'>
         {{label}}
+        <!-- <input type="text" value='' :placeholder='label' @focus='showTextarea=true' @blur='showTextarea'/> -->
         <span class="el-input__suffix"><span class="el-input__suffix-inner"><i class="el-select__caret el-input__icon el-icon-arrow-up" :class='{"is-reverse": showTextarea}'></i> </span></span>
       </label>
       <div class='textareaDropdown' v-show='!isTab || showTextarea'>
@@ -41,10 +42,17 @@
         default: false
       }
     },
+    mounted: function(){
+      document.body.click = function(e){
+        console.log(e)
+      }
+    },
     methods: {
       onBlur () {
-        this.showTextarea = false
         this.$emit('blur')
+      },
+      dropUp(){
+        this.showTextarea = false
       },
       onChange (val, name) {
         if (this.reverse) {
