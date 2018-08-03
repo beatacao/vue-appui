@@ -201,10 +201,10 @@
               })
             })
             this.$emit('change', vals || [])
+            return
           }
-        }else{
-          this.$emit('change', v)
         }
+        this.$emit('change', v)
       },
       visibleChange (isVisible) {
         var self = this
