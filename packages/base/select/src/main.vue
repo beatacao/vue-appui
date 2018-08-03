@@ -191,13 +191,35 @@
         this.$emit('focus', e)
       },
       onChange (v) {
+        var self = this
         this.selectedLength = v.length
-        this.$emit('change', v)
+        if (!this.custom || Object.keys(this.custom).length === 0 || (isNaN(parseInt(this.custom.customMin)) && isNaN(parseInt(this.custom.customMax)))) {
+          if(v.length>0){
+            var vals = v.filter(function(v){
+              return self.options.some(function(o){
+                return o.value === v
+              })
+            })
+            this.$emit('change', vals || [])
+          }
+        }else{
+          this.$emit('change', v)
+        }
       },
       visibleChange (isVisible) {
+        var self = this
         if (!isVisible) {
           if (this.custom && Object.keys(this.custom).length > 0 && !isNaN(parseInt(this.custom.customMin)) && !isNaN(parseInt(this.custom.customMax))) {
-            this.$emit('change', [parseInt(this.custom.customMin) + '#' + parseInt(this.custom.customMax)])
+            this.$emit('change', [parseInt(this.custom.customMin)*parseFloat(this.custom.transform).toFixed(this.custom.dotNumber || 2) + '#' + parseInt(this.custom.customMax)*parseFloat(this.custom.transform).toFixed(this.custom.dotNumber || 2)])
+          }else{
+            if(this.value.length>0){
+              var vals = this.value.filter(function(v){
+                return self.options.some(function(o){
+                  return o.value === v
+                })
+              })
+              this.$emit('change', vals || [])
+            }
           }
         }
         this.$emit('visibleChange', isVisible)
