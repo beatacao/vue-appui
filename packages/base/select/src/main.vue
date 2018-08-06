@@ -1,6 +1,6 @@
 <template>
   <div class='vu__base-select' :class='{selected: selectedLength>0 || (currentValue && currentValue.length>0)}'>
-    <el-b-select v-if='!multiple && !group' v-model="currentValue" :value='value' :placeholder="placeholder"  
+    <el-b-select v-if='!multiple && !group' v-model="currentValue" :value='value' :placeholder="placeholder"  :loading='loading' :loadingText='loadingText' :noMatchText='noMatchText'
       @focus='onFocus'
       @change='onChange'
       @visible-change='visibleChange'
@@ -19,7 +19,7 @@
             </div>
         </slot>
       </el-b-select>
-      <el-b-select v-if='multiple && !group'
+      <el-b-select v-if='multiple && !group'  :loading='loading' :loadingText='loadingText' :noMatchText='noMatchText'
         :remote='remote'
         :filterable='remote'
         @queryChange="queryChange"
@@ -64,7 +64,7 @@
             </div>
         </slot>
       </el-b-select>
-      <el-b-select v-if='!multiple && group' v-model="currentValue" :value='value' :placeholder="placeholder"  
+      <el-b-select v-if='!multiple && group' v-model="currentValue" :value='value' :placeholder="placeholder"  :loading='loading' :loadingText='loadingText' :noMatchText='noMatchText'
         @focus='onFocus'
         @change='onChange'
         @visible-change='visibleChange'
@@ -87,7 +87,7 @@
             </div>
         </slot>
         </el-b-select>
-        <el-b-select v-if='multiple && group'
+        <el-b-select v-if='multiple && group'  :loading='loading' :loadingText='loadingText' :noMatchText='noMatchText'
           :remote='remote'
           :filterable='remote'
           @queryChange="queryChange"
@@ -170,6 +170,15 @@
       required: {
         type: Boolean,
         default: false
+      },
+      loading: {
+        default: false
+      },
+      loadingText: {
+        default: '无数据'
+      },
+      noMatchText: {
+        default: '无匹配的数据'
       }
     },
     data () {
