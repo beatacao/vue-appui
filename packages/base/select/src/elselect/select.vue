@@ -6,7 +6,7 @@
     v-clickoutside="handleClose">
     <div
     class="el-select__tags"
-    v-if="multiple && displayTags"
+    v-if="(multiple && displayTags)"
     ref="tags"
     :style="{ 'max-width': inputWidth - 32 + 'px' }">
     <span v-if="collapseTags && selected.length">
@@ -102,15 +102,15 @@
       ref="reference"
       v-model="selectedLabel"
       type="text"
-      :placeholder="remote && filterable ? '' : placeholder"
+      :placeholder="remote || filterable || customFilterable ? (visible ? filterPlaceholder : placeholder) : placeholder"
       :name="name"
       :id="id"
       :auto-complete="autoComplete"
       :size="selectSize"
       :disabled="selectDisabled"
-      :readonly="!filterable || multiple"
+      :readonly="!customFilterable"
       :validate-event="false"
-      :class="{ 'is-focus': visible }"
+      :class="{ 'is-focus': visible, 'is-customfilterable': customFilterable }"
       @focus="handleFocus"
       @blur="handleBlur"
       @keyup.native="debouncedOnInputChange"
@@ -331,6 +331,12 @@
           return []
         }
       },
+      customFilterable: {
+        default: false
+      },
+      filterPlaceholder: {
+        default: '输入关键字'
+      }
     },
 
     data() {
@@ -594,7 +600,7 @@
 
       handleFocus(event) {
         if (!this.softFocus) {
-          if (this.automaticDropdown || this.filterable) {
+          if (this.automaticDropdown || this.filterable || this.customFilterable) {
             this.visible = true;
             this.menuVisibleOnFocus = true;
           }
@@ -803,7 +809,7 @@
       },
 
       onInputChange() {
-        if (this.filterable && this.query !== this.selectedLabel) {
+        if ((this.filterable || this.customFilterable) && this.query !== this.selectedLabel) {
           this.query = this.selectedLabel;
           this.handleQueryChange(this.query);
         }

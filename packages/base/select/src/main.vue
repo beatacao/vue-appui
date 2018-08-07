@@ -1,18 +1,22 @@
 <template>
-  <div class='vu__base-select' :class='{selected: selectedLength>0 || (currentValue && currentValue.length>0)}'>
+  <div class='vu__base-select' :class='{selected: selectedLength>0 || (currentValue && currentValue.length>0), filterable: customFilterable}'>
     <el-b-select v-if='!multiple && !group' v-model="currentValue" :value='value' :placeholder="placeholder"  :loading='loading' :loadingText='loadingText' :noMatchText='noMatchText'
       @focus='onFocus'
       @change='onChange'
+      @blur='onBlur'
       @visible-change='visibleChange'
+      :customFilterable='customFilterable'
+      :filterPlaceholder = 'filterPlaceholder'
       v-bind='$attrs'>
         <span slot='inputPrev' class='requiredIcon' v-if='required'>*</span>
-        <el-option
+        <el-b-option
+          ref='el-b-option'
           v-for="item in options"
           :key="dataRename.value ? item[dataRename.value] : item.value"
           :label="dataRename.label ? item[dataRename.label] : item.label"
           :value="dataRename.value ? item[dataRename.value] : item.value"
           >
-        </el-option>
+        </el-b-option>
         <slot name='custom'>
             <div v-if='custom &&  Object.keys(custom).length>0'>
                 <input type="text" name="custom-min" :min="custom.valueMin" v-model='custom.customMin'>{{custom.unit||""}} - <input type="text" name="custom-max"  :max="custom.valueMax" v-model='custom.customMax'>{{custom.unit||""}}
@@ -28,36 +32,42 @@
         multiple
         @focus='onFocus'
         @change='onChange'
+        @blur='onBlur'
         @visible-change='visibleChange'
         :value='value'
         :placeholder="placeholder" 
         :displayTags='displayTags'
+        :customFilterable='customFilterable'
+        :filterPlaceholder = 'filterPlaceholder'
         collapse-tags v-bind='$attrs'>
         <span slot='inputPrev' class='requiredIcon' v-if='required'>*</span>
-        <el-option
+        <li :class="{'el-select-dropdown__item': true, 'allOption': true, selected: isAll}" v-if='options && options.length>0' @click='selectAll'><span>全选</span> <!----></li>
+        <el-b-option  
+          ref='el-b-option'
           v-for="item in options"
           :key="dataRename.value ? item[dataRename.value] : item.value"
           :label="dataRename.label ? item[dataRename.label] : item.label"
           :value="dataRename.value ? item[dataRename.value] : item.value">
           <span>{{dataRename.label ? item[dataRename.label] : item.label}}</span>
           <div class='child' v-if='item.childs && item.childs.length>0'>
-            <el-option 
+            <el-b-option 
+              ref='el-b-option'
               v-for='citem in item.childs'
               :key="dataRename.value ? citem[dataRename.value] : citem.value"
               :label="dataRename.label ? citem[dataRename.label] : citem.label"
               :value="dataRename.value ? citem[dataRename.value] : citem.value">
                 <span>{{dataRename.label ? citem[dataRename.label] : citem.label}}</span>
                 <div class='gchild' v-if='citem.childs && citem.childs.length>0'>
-                  <el-option 
+                  <el-b-option 
                     v-for='gitem in citem.childs'
                     :key="dataRename.value ? gitem[dataRename.value] : gitem.value"
                     :label="dataRename.label ? gitem[dataRename.label] : gitem.label"
                     :value="dataRename.value ? gitem[dataRename.value] : gitem.value">
-                  </el-option>
+                  </el-b-option>
                 </div>
-            </el-option>
+            </el-b-option>
           </div>
-        </el-option>
+        </el-b-option>
         <slot name='custom'>
             <div v-if='custom &&  Object.keys(custom).length>0'>
                 <input type="text" name="custom-min" :min="custom.valueMin" v-model='custom.customMin'>{{custom.unit||""}} - <input type="text" name="custom-max"  :max="custom.valueMax" v-model='custom.customMax'>{{custom.unit||""}}
@@ -68,18 +78,22 @@
         @focus='onFocus'
         @change='onChange'
         @visible-change='visibleChange'
+        @blur='onBlur'
+        :customFilterable='customFilterable'
+        :filterPlaceholder = 'filterPlaceholder'
         v-bind='$attrs'>
         <span slot='inputPrev' class='requiredIcon' v-if='required'>*</span>
         <el-option-group 
           v-for="group in options"
           :key="group.label"
           :label="group.label">
-          <el-option
+          <el-b-option
+            ref='el-b-option'
             v-for="item in group.options"
             :key="dataRename.value ? item[dataRename.value] : item.value"
             :label="dataRename.label ? item[dataRename.label] : item.label"
             :value="dataRename.value ? item[dataRename.value] : item.value">
-          </el-option>
+          </el-b-option>
         </el-option-group>
         <slot name='custom'>
             <div v-if='custom &&  Object.keys(custom).length>0'>
@@ -99,18 +113,23 @@
           :value='value'
           :placeholder="placeholder" 
           :displayTags='displayTags'
+          :customFilterable='customFilterable'
+          :filterPlaceholder = 'filterPlaceholder'
           collapse-tags v-bind='$attrs'>
           <span slot='inputPrev' class='requiredIcon' v-if='required'>*</span>
+          <!-- <el-option key='all' label='全选' value='all'></el-option> -->
+          <li :class="{'el-select-dropdown__item': true, 'allOption': true, selected: isAll}" v-if='options && options.length>0' @click='selectAll'><span>全选</span> <!----></li>
           <el-option-group 
             v-for="group in options"
             :key="group.label"
             :label="group.label">
-            <el-option
+            <el-b-option
+              ref='el-b-option'
               v-for="item in group.options"
               :key="dataRename.value ? item[dataRename.value] : item.value"
               :label="dataRename.label ? item[dataRename.label] : item.label"
               :value="dataRename.value ? item[dataRename.value] : item.value">
-            </el-option>
+            </el-b-option>
           </el-option-group>
           <slot name='custom'>
             <div v-if='custom &&  Object.keys(custom).length>0'>
@@ -123,11 +142,12 @@
 
 <script>
   import ElBSelect from './elselect/select.vue'
+  import ElBOption from './elselect/option.vue'
 
   export default {
     name: 'BSelect',
     extends: ElBSelect,
-    components: {ElBSelect},
+    components: {ElBSelect, ElBOption},
     props: {
       value: {
         default: ''
@@ -179,6 +199,12 @@
       },
       noMatchText: {
         default: '无匹配的数据'
+      },
+      customFilterable: {
+        default: false
+      },
+      filterPlaceholder: {
+        default: '输入关键字'
       }
     },
     data () {
@@ -187,17 +213,68 @@
         selectedLength: 0
       }
     },
+    computed: {
+      isAll: {
+        get: function(){
+          var self = this
+          var vals = self.value || []
+          var displayOptions =  this.options.filter(function(option){
+            return !option.isFiltered
+          })
+          var isAll
+          if(displayOptions && displayOptions.length>0){
+            isAll = displayOptions.every(function(option){
+              return vals.indexOf(option.value) > -1
+            })
+          }else{
+            isAll = false
+          }
+          return isAll
+        },
+        set: function(v){
+          var vals = []
+          if(v){
+             this.options.forEach(function(option){
+              if(!option.isFiltered && option.value){
+                vals.push(option.value)
+              }
+            })
+          }
+          this.$emit('change', vals)
+        }
+      }
+    },
     watch: {
       value (val) {
         this.currentValue = val
         if (!val || val.length === 0) {
           this.selectedLength = 0
         }
+      },
+      options (val) {
+        // if(val.length>0){
+        //   console.log('options')
+        //   console.log(this)
+        //   console.log(val)
+        // }
       }
     },
     methods: {
+      selectAll(e){
+        this.isAll = !this.isAll
+        
+      },
       onFocus (e) {
+        if(this.customFilterable){
+          this.$refs['el-b-option'].forEach(function($option){
+            $option.queryChange('')
+          })
+        }
+        
         this.$emit('focus', e)
+      },
+      onBlur (e) {
+        this.$emit('blur', e)
       },
       onChange (v) {
         var self = this
@@ -235,7 +312,14 @@
       },
       queryChange (val) {
         if (val && val.length > 0) {
-          this.$emit('remoteMethod', val)
+          if(this.customFilterable){
+            this.$emit('filterMethod', val)
+            return 
+          }else if(this.remote){
+            this.$emit('remoteMethod', val)
+            return 
+          }
+          this.$emit('queryChange', val)
         }
       }
     }

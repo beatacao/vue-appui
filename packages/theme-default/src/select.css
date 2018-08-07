@@ -9,3 +9,18 @@
 .vu__base-select .el-select{
     visibility: hidden;
 } */
+.el-select .el-input.is-focus.is-customfilterable .el-input__inner::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: #b1b1b1;
+}
+.el-select .el-input.is-focus.is-customfilterable .el-input__inner:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #b1b1b1;
+}
+.el-select .el-input.is-focus.is-customfilterable .el-input__inner::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #b1b1b1;
+}
+.el-select .el-input.is-focus.is-customfilterable .el-input__inner:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #b1b1b1;
+}
+.el-select .el-input.is-focus.is-customfilterable .el-input__inner::-ms-input-placeholder { /* Microsoft Edge */
+    color: #b1b1b1;
+}
