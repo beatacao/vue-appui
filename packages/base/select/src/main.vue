@@ -41,7 +41,10 @@
         :filterPlaceholder = 'filterPlaceholder'
         collapse-tags v-bind='$attrs'>
         <span slot='inputPrev' class='requiredIcon' v-if='required'>*</span>
-        <li :class="{'el-select-dropdown__item': true, 'allOption': true, selected: isAll}" v-if='options && options.length>0' @click='selectAll'><span>全选</span> <!----></li>
+        <li :class="{'el-select-dropdown__item': true, 'allOption': true, selected: isAll, 'custom-filterable': customFilterable}" v-if='options && options.length>0'>
+          <span @click='selectAll' class='selectAll'>全选</span> 
+          <span class='filterSelected' @click='filterSelected' v-show='customFilterable'>查看已选（{{value.length}}）</span>
+        </li>
         <el-b-option  
           ref='el-b-option'
           v-for="item in options"
@@ -117,8 +120,10 @@
           :filterPlaceholder = 'filterPlaceholder'
           collapse-tags v-bind='$attrs'>
           <span slot='inputPrev' class='requiredIcon' v-if='required'>*</span>
-          <!-- <el-option key='all' label='全选' value='all'></el-option> -->
-          <li :class="{'el-select-dropdown__item': true, 'allOption': true, selected: isAll}" v-if='options && options.length>0' @click='selectAll'><span>全选</span> <!----></li>
+          <li :class="{'el-select-dropdown__item': true, 'allOption': true, selected: isAll, 'custom-filterable': customFilterable}" v-if='options && options.length>0'>
+            <span @click='selectAll' class='selectAll'>全选</span> 
+            <span class='filterSelected' @click='filterSelected' v-show='customFilterable'>查看已选（{{value.length}}）</span>
+          </li>
           <el-option-group 
             v-for="group in options"
             :key="group.label"
@@ -234,11 +239,13 @@
         set: function(v){
           var vals = []
           if(v){
+            var alls = []
              this.options.forEach(function(option){
               if(!option.isFiltered && option.value){
-                vals.push(option.value)
+                alls.push(option.value)
               }
             })
+            vals = [...new Set(alls.concat(this.value))]
           }
           this.$emit('change', vals)
         }
@@ -265,9 +272,10 @@
         
       },
       onFocus (e) {
+        var self = this
         if(this.customFilterable){
           this.$refs['el-b-option'].forEach(function($option){
-            $option.queryChange('')
+            $option.queryChange(self.query)
           })
         }
         
@@ -294,6 +302,7 @@
       },
       visibleChange (isVisible) {
         var self = this
+        this.visible = isVisible
         if (!isVisible) {
           if (this.custom && Object.keys(this.custom).length > 0 && !isNaN(parseInt(this.custom.customMin)) && !isNaN(parseInt(this.custom.customMax))) {
             this.$emit('change', [parseInt(this.custom.customMin)*parseFloat(this.custom.transform).toFixed(this.custom.dotNumber || 2) + '#' + parseInt(this.custom.customMax)*parseFloat(this.custom.transform).toFixed(this.custom.dotNumber || 2)])
@@ -308,18 +317,30 @@
             }
           }
         }
-        this.$emit('visibleChange', isVisible)
+        this.$emit('visibleChange', {isVisible: isVisible, query: this.query})
       },
       queryChange (val) {
-        if (val && val.length > 0) {
-          if(this.customFilterable){
-            this.$emit('filterMethod', val)
-            return 
-          }else if(this.remote){
-            this.$emit('remoteMethod', val)
-            return 
-          }
-          this.$emit('queryChange', val)
+        this.query = val
+        if(this.customFilterable){
+          this.$emit('filterMethod', val)
+          return 
+        }else if(this.remote){
+          this.$emit('remoteMethod', val)
+          return 
+        }
+        this.$emit('queryChange', val)
+      },
+      filterSelected () {
+        var self = this
+        if(this.customFilterable){
+          this.$refs['el-b-option'].forEach(function($option){
+            if(self.value.indexOf($option.value) > -1){
+              $option.queryChange('')
+            }else{
+              $option.queryChange($option.label+'noMatch')
+            }
+          })
+          this.$emit('filterSelected')
         }
       }
     }
