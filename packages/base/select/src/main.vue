@@ -4,6 +4,7 @@
       @focus='onFocus'
       @change='onChange'
       @blur='onBlur'
+      ref='select'
       @visible-change='visibleChange'
       :customFilterable='customFilterable'
       :filterPlaceholder = 'filterPlaceholder'
@@ -42,8 +43,15 @@
         collapse-tags v-bind='$attrs'>
         <span slot='inputPrev' class='requiredIcon' v-if='required'>*</span>
         <li :class="{'el-select-dropdown__item': true, 'allOption': true, selected: isAll, 'custom-filterable': customFilterable}" v-if='options && options.length>0'>
-          <span @click='selectAll' class='selectAll'>全选</span> 
-          <span class='filterSelected' @click='filterSelected' v-show='customFilterable'>查看已选（{{value.length}}）</span>
+          <span @click='selectAll' class='selectAll'>全选<i>（{{displayOptions.length}}）</i></span> 
+          <span class='filterSelected' @click='filterSelected' v-show='customFilterable'>
+              <template v-if='!filterSelectedStatus'>
+                查看已选（{{value.length}}）
+              </template>
+              <template v-if='filterSelectedStatus'>
+                  返回&nbsp;&nbsp;
+              </template>
+          </span>
         </li>
         <el-b-option  
           ref='el-b-option'
@@ -84,6 +92,7 @@
         @blur='onBlur'
         :customFilterable='customFilterable'
         :filterPlaceholder = 'filterPlaceholder'
+        ref='select'
         v-bind='$attrs'>
         <span slot='inputPrev' class='requiredIcon' v-if='required'>*</span>
         <el-option-group 
@@ -114,6 +123,7 @@
           @change='onChange'
           @visible-change='visibleChange'
           :value='value'
+          ref='select'
           :placeholder="placeholder" 
           :displayTags='displayTags'
           :customFilterable='customFilterable'
@@ -121,8 +131,15 @@
           collapse-tags v-bind='$attrs'>
           <span slot='inputPrev' class='requiredIcon' v-if='required'>*</span>
           <li :class="{'el-select-dropdown__item': true, 'allOption': true, selected: isAll, 'custom-filterable': customFilterable}" v-if='options && options.length>0'>
-            <span @click='selectAll' class='selectAll'>全选</span> 
-            <span class='filterSelected' @click='filterSelected' v-show='customFilterable'>查看已选（{{value.length}}）</span>
+            <span @click='selectAll' class='selectAll'>全选<i>（{{displayOptions.length}}）</i></span> 
+            <span class='filterSelected' @click='filterSelected' v-show='customFilterable'>
+              <template v-if='!filterSelectedStatus'>
+              查看已选（{{value.length}}）
+              </template>
+              <template v-if='filterSelectedStatus'>
+                  返回&nbsp;&nbsp;
+              </template>
+            </span>
           </li>
           <el-option-group 
             v-for="group in options"
@@ -215,7 +232,9 @@
     data () {
       return {
         currentValue: this.value || '',
-        selectedLength: 0
+        selectedLength: 0,
+        filterSelectedStatus: false,
+        displayOptions: this.options || []
       }
     },
     computed: {
@@ -238,14 +257,18 @@
         },
         set: function(v){
           var vals = []
+          var alls = []
+          this.options.forEach(function(option){
+            if(!option.isFiltered && option.value){
+              alls.push(option.value)
+            }
+          })
           if(v){
-            var alls = []
-             this.options.forEach(function(option){
-              if(!option.isFiltered && option.value){
-                alls.push(option.value)
-              }
-            })
             vals = [...new Set(alls.concat(this.value))]
+          }else{
+            vals = this.value.filter(function(v){
+              return alls.indexOf(v) === -1
+            })
           }
           this.$emit('change', vals)
         }
@@ -258,12 +281,10 @@
           this.selectedLength = 0
         }
       },
-      options (val) {
-        // if(val.length>0){
-        //   console.log('options')
-        //   console.log(this)
-        //   console.log(val)
-        // }
+      options (options) {
+        this.displayOptions = options.filter(function(option){
+          return !option.isFiltered
+        })
       }
     },
     methods: {
@@ -335,15 +356,23 @@
       filterSelected () {
         var self = this
         if(this.customFilterable){
-          this.$refs['el-b-option'].forEach(function($option){
-            if(self.value.indexOf($option.value) > -1){
-              $option.queryChange('')
-            }else{
-              $option.queryChange($option.label+'noMatch')
-            }
-          })
-          this.$emit('filterSelected')
+          if(!this.filterSelectedStatus){
+            this.$refs['el-b-option'].forEach(function($option){
+              if(self.value.indexOf($option.value) > -1){
+                $option.queryChange('')
+              }else{
+                $option.queryChange($option.label+'noMatch')
+              }
+            })
+            this.$emit('filterSelected')
+          }else{
+            this.$refs['el-b-option'].forEach(function($option){
+              $option.queryChange(self.query)
+            })
+            this.$emit('filterMethod', self.query)
+          }
         }
+        this.filterSelectedStatus = !this.filterSelectedStatus
       }
     }
   }

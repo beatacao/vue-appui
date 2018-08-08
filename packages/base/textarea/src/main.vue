@@ -7,7 +7,7 @@
       </label>
       <div class='textareaDropdown' v-show='!isTab || showTextarea'>
           <el-input ref='textarea' class='base-textarea' type='textarea' v-bind='$attrs' :value='value' :rows='rows'  @change='onChange(arguments[0], "text")' @blur='onBlur'></el-input>
-          <p v-if='reverse'><el-checkbox :checked='false' @change='onChange(arguments[0], "reverse")'>反向</el-checkbox></p>
+          <p v-if='reverse'><el-checkbox v-model='reverseFilter' @change='onChange(arguments[0], "reverse")'>反向</el-checkbox></p>
       </div>
   </div>
 </template>
@@ -39,6 +39,9 @@
       value: '',
       reverse: {
         type: Boolean,
+        default: false
+      },
+      reverseFilter: {
         default: false
       }
     },
