@@ -305,7 +305,9 @@
         this.visible = isVisible
         if (!isVisible) {
           if (this.custom && Object.keys(this.custom).length > 0 && !isNaN(parseInt(this.custom.customMin)) && !isNaN(parseInt(this.custom.customMax))) {
-            this.$emit('change', [parseInt(this.custom.customMin)*parseFloat(this.custom.transform).toFixed(this.custom.dotNumber || 2) + '#' + parseInt(this.custom.customMax)*parseFloat(this.custom.transform).toFixed(this.custom.dotNumber || 2)])
+            this.$emit('change', [
+                parseFloat(this.custom.customMin)*parseFloat(this.custom.transform).toFixed(isNaN(parseInt(this.custom.dotNumber, 10)) ? 2 : parseInt(this.custom.dotNumber, 10)) + '#' + 
+                parseFloat(this.custom.customMax)*parseFloat(this.custom.transform).toFixed(isNaN(parseInt(this.custom.dotNumber, 10)) ? 2 : parseInt(this.custom.dotNumber, 10))])
           }else{
             if(this.value.length>0){
               var vals = this.value.filter(function(v){
