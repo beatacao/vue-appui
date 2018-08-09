@@ -234,7 +234,8 @@
         currentValue: this.value || '',
         selectedLength: 0,
         filterSelectedStatus: false,
-        displayOptions: this.options || []
+        displayOptions: this.options || [],
+        domChanging: false
       }
     },
     computed: {
@@ -270,16 +271,19 @@
               return alls.indexOf(v) === -1
             })
           }
+          this.$emit('domChange', {length: vals.length, isIng: true})
           this.$emit('change', vals)
         }
       }
     },
     watch: {
       value (val) {
+        var self = this
         this.currentValue = val
         if (!val || val.length === 0) {
           this.selectedLength = 0
         }
+        this.$emit('domChange', {length: val.length, isIng: false})
       },
       options (options) {
         this.displayOptions = options.filter(function(option){
