@@ -8,6 +8,7 @@
       @visible-change='visibleChange'
       :customFilterable='customFilterable'
       :filterPlaceholder = 'filterPlaceholder'
+      :popperAppendToBody="popperAppendToBody"
       v-bind='$attrs'>
         <span slot='inputPrev' class='requiredIcon' v-if='required'>*</span>
         <el-b-option
@@ -40,6 +41,7 @@
         :displayTags='displayTags'
         :customFilterable='customFilterable'
         :filterPlaceholder = 'filterPlaceholder'
+        :popperAppendToBody="popperAppendToBody"
         collapse-tags v-bind='$attrs'>
         <span slot='inputPrev' class='requiredIcon' v-if='required'>*</span>
         <li :class="{'el-select-dropdown__item': true, 'allOption': true, selected: isAll, 'custom-filterable': customFilterable}" v-if='options && options.length>0'>
@@ -93,6 +95,7 @@
         :customFilterable='customFilterable'
         :filterPlaceholder = 'filterPlaceholder'
         ref='select'
+        :popperAppendToBody="popperAppendToBody"
         v-bind='$attrs'>
         <span slot='inputPrev' class='requiredIcon' v-if='required'>*</span>
         <el-option-group 
@@ -128,6 +131,7 @@
           :displayTags='displayTags'
           :customFilterable='customFilterable'
           :filterPlaceholder = 'filterPlaceholder'
+          :popperAppendToBody="popperAppendToBody"
           collapse-tags v-bind='$attrs'>
           <span slot='inputPrev' class='requiredIcon' v-if='required'>*</span>
           <li :class="{'el-select-dropdown__item': true, 'allOption': true, selected: isAll, 'custom-filterable': customFilterable}" v-if='options && options.length>0'>
@@ -227,6 +231,9 @@
       },
       filterPlaceholder: {
         default: '输入关键字'
+      },
+      popperAppendToBody: {
+        default: false
       }
     },
     data () {
