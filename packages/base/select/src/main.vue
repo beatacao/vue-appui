@@ -46,7 +46,7 @@
         <span slot='inputPrev' class='requiredIcon' v-if='required'>*</span>
         <li :class="{'el-select-dropdown__item': true, 'allOption': true, selected: isAll, 'custom-filterable': customFilterable}" v-if='options && options.length>0'>
           <span @click='selectAll' class='selectAll'>全选<i>（{{displayOptions.length}}）</i></span> 
-          <span class='filterSelected' @click='filterSelected' v-show='customFilterable'>
+          <span class='filterSelected' :class='{disabled: value.length === 0}' @click='filterSelected' v-show='customFilterable'>
               <template v-if='!filterSelectedStatus'>
                 查看已选（{{value.length}}）
               </template>
@@ -136,7 +136,7 @@
           <span slot='inputPrev' class='requiredIcon' v-if='required'>*</span>
           <li :class="{'el-select-dropdown__item': true, 'allOption': true, selected: isAll, 'custom-filterable': customFilterable}" v-if='options && options.length>0'>
             <span @click='selectAll' class='selectAll'>全选<i>（{{displayOptions.length}}）</i></span> 
-            <span class='filterSelected' @click='filterSelected' v-show='customFilterable'>
+            <span class='filterSelected' :class='{disabled: value.length === 0}' @click='filterSelected' v-show='customFilterable'>
               <template v-if='!filterSelectedStatus'>
               查看已选（{{value.length}}）
               </template>
@@ -310,7 +310,6 @@
             $option.queryChange(self.query)
           })
         }
-        
         this.$emit('focus', e)
       },
       onBlur (e) {
@@ -366,6 +365,9 @@
       },
       filterSelected () {
         var self = this
+        if(this.value && this.value.length === 0){
+          return
+        }
         if(this.customFilterable){
           if(!this.filterSelectedStatus){
             this.$refs['el-b-option'].forEach(function($option){
