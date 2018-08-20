@@ -1,5 +1,5 @@
 <template>
-  <el-input :style='{"min-width": 8*placeholder.length*2 + "px"}' :placeholder='placeholder' v-bind='$attrs' @change='onChange'></el-input>
+  <el-input :style='{"min-width": 8*placeholder.length*2 + "px"}' :placeholder='placeholder' v-bind='$attrs' @change='onChange' @focus='onFocus' @blur='onBlur'></el-input>
 </template>
 
 <script>
@@ -17,6 +17,12 @@
       // console.log(this)
     },
     methods: {
+      onBlur () {
+        this.$emit('blur')
+      },
+      onFocus () {
+        this.$emit('focus')
+      },
       onChange (val) {
         this.$emit('change', val)
       }

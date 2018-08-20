@@ -74,6 +74,7 @@
       labelClick () {
         if (!this.isTab) return
         this.showTextarea = !this.showTextarea
+        this.showTextarea && this.$emit('focus')
       }
     }
   }
